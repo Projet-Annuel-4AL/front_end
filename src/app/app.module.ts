@@ -7,12 +7,16 @@ import {HttpClientModule} from "@angular/common/http";
 import {MonacoEditorModule} from "ngx-monaco-editor";
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CodeRunnerComponent,
-    LoginComponent
+    LoginComponent,
+    PageNotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

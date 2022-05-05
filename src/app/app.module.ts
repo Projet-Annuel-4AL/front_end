@@ -2,13 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CodeRunnerComponent } from './code-runner/code-runner.component';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {MonacoEditorModule} from "ngx-monaco-editor";
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './Authentication/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './Authentication/register/register.component';
+import { PostsComponent } from './home/posts/posts.component';
+import { CreatePostComponent } from './home/create-post/create-post.component';
+import { SubmitPostComponent } from './submit-post/submit-post.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -16,14 +21,20 @@ import { HomeComponent } from './home/home.component';
     CodeRunnerComponent,
     LoginComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent,
+    PostsComponent,
+    CreatePostComponent,
+    SubmitPostComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    AngularEditorModule,
     MonacoEditorModule.forRoot(),
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

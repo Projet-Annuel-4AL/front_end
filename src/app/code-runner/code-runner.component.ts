@@ -45,7 +45,7 @@ export class CodeRunnerComponent implements OnInit {
     if (this.language == 'java') lang = 0;
     const body = {language: lang, code: this.code};
     this.http
-      .post( "http://localhost:8080/compiler",body, {responseType: 'text'})
+      .post( "http://localhost:3000/compiler",body, {responseType: 'text'})
       .subscribe(response => {
         this.output = response;
       })

@@ -1,0 +1,16 @@
+.my-code-editor {
+  .editor-container {
+    height: calc(100vh - 100px);
+  }
+}
+
+.center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#title{
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

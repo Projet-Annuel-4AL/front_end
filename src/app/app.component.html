@@ -2,19 +2,23 @@
 <head></head>
 <body>
 <mat-toolbar color="primary">
-  <span routerLink="/">Palit</span>
+  <a routerLink="/">Palit</a>
   <div class="spacer"></div>
 
   <a mat-button routerLink="/login">Se Connecter</a>
 
-  <a mat-button  routerLink="/register">S'inscrire</a>
-
-  <a mat-button routerLink="/code">Code</a>
+  <a mat-button routerLink="/register">S'inscrire</a>
 
   <form class="d-flex">
     <input class="form-control me-sm-2" type="text" placeholder="Recherche...">
   </form>
 </mat-toolbar>
 <router-outlet></router-outlet>
+<footer style="background-color: #673ab4">
+  <div class="text-center p-4" style="color: white">
+    © 2022 Copyright:
+    <a class="text-reset fw-bold " href="https://mdbootstrap.com/">PALIT</a>
+  </div>
+</footer>
 </body>
 </html>

@@ -1,0 +1,20 @@
+<form [formGroup]="postForm">
+    <div class="form-group">
+      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Titre">
+    </div>
+    <div class="dropzone form-group" appSubmitImageVideo>
+      <input type="file" #fileDropRef id="fileDropRef" multiple/>
+      <img src="">
+      <h1><i class="bi bi-file-earmark-arrow-up-fill"></i></h1>
+      <h3>Glisser un fichier ici</h3>
+      <h3>ou</h3>
+      <label>Choisir un fichier</label>
+    </div>
+    <mat-card-actions>
+      <div class="center">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!postForm.valid" (click)="submitPostForm()">
+          Valider
+        </button>
+      </div>
+    </mat-card-actions>
+</form>

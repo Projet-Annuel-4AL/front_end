@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './Authentication/login/login.component';
-import { RegisterComponent } from './Authentication/register/register.component';
-import { CodeRunnerComponent } from './submit-post/code-runner/code-runner.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HomeComponent } from './home/home.component';
-import { SubmitPostComponent } from './submit-post/submit-post.component';
+import { LoginComponent } from './Authentication/components/login/login.component';
+import { RegisterComponent } from './Authentication/components/register/register.component';
+import { PageNotFoundComponent } from './errors-page/components/page-not-found/page-not-found.component';
+import { SubmitPostComponent } from './post/components/submit-post/submit-post.component';
+import { CreatePostComponent } from './post/components/create-post/create-post.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component:  CreatePostComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'code', component: CodeRunnerComponent },
   { path: 'submit', component: SubmitPostComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];

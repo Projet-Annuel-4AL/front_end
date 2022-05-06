@@ -1,33 +1,20 @@
 <html class="h-100">
 <head></head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">PALIT</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<mat-toolbar color="primary">
+  <span routerLink="/">Palit</span>
+  <div class="spacer"></div>
 
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Se Connecter</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/register">S'inscrire</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/code">Code</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="text" placeholder="Search">
-      </form>
-    </div>
-  </div>
-</nav>
+  <a mat-button routerLink="/login">Se Connecter</a>
+
+  <a mat-button  routerLink="/register">S'inscrire</a>
+
+  <a mat-button routerLink="/code">Code</a>
+
+  <form class="d-flex">
+    <input class="form-control me-sm-2" type="text" placeholder="Recherche...">
+  </form>
+</mat-toolbar>
 <router-outlet></router-outlet>
 </body>
 </html>

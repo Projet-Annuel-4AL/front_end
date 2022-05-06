@@ -1,5 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-submit-image-video',
@@ -11,21 +12,30 @@ export class SubmitImageVideoComponent implements OnInit {
   postForm = new FormGroup({
     title: new FormControl(null, [
       Validators.required
-    ]),
-    description: new FormControl(null, [
-      Validators.required
     ])
   })
 
-  constructor() {
+  files: File[] = [];
+
+  onSelect(event: { addedFiles: any; }) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
   }
 
-  ngOnInit(): void {
+  onRemove(event: File) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
   }
 
-  submitPostForm() {
+  constructor(private http: HttpClient) {}
 
+  ngOnInit() {
+    if (!this.files) {
+      console.error('No file to read. Please provide a file using the [file] Input property.');
+      return;
+    }
+
+    console.log(this.files);
   }
-
 
 }

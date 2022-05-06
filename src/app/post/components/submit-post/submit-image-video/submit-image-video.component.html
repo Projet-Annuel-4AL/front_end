@@ -1,20 +1,23 @@
 <form [formGroup]="postForm">
-    <div class="form-group">
-      <input type="text" class="form-control" id="title" formControlName="title" placeholder="Titre">
+  <div class="form-group container text-center">
+    <input type="text" class="form-control" id="title" formControlName="title" placeholder="Titre">
+  </div>
+  <div class="container text-center">
+    <ngx-dropzone style="width: 600px; height: 250px;" [processDirectoryDrop]=true accept="image/jpeg,image/jpg,image/png,image/gif" (change)="onSelect($event)">
+      <ngx-dropzone-label>Glisser ou Choisir un fichier</ngx-dropzone-label>
+      <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-preview>
+    </ngx-dropzone>
+    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-image-preview>
+  </div>
+  <mat-card-actions>
+    <div class="center">
+      <button type="submit" mat-raised-button color="primary">
+        Valider
+      </button>
     </div>
-    <div class="dropzone form-group" appSubmitImageVideo>
-      <input type="file" #fileDropRef id="fileDropRef" multiple/>
-      <img src="">
-      <h1><i class="bi bi-file-earmark-arrow-up-fill"></i></h1>
-      <h3>Glisser un fichier ici</h3>
-      <h3>ou</h3>
-      <label>Choisir un fichier</label>
-    </div>
-    <mat-card-actions>
-      <div class="center">
-        <button type="submit" mat-raised-button color="primary" [disabled]="!postForm.valid" (click)="submitPostForm()">
-          Valider
-        </button>
-      </div>
-    </mat-card-actions>
+  </mat-card-actions>
 </form>

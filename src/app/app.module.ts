@@ -10,6 +10,7 @@ import { CoreModule } from "./core/core.module";
 import { AppComponent } from './app.component';
 import { PostModule } from "./post/post.module";
 import { CreatePostComponent} from "./post/components/create-post/create-post.component";
+import { ListPostComponent } from "./post/components/list-post/list-post.component";
 import { CodeRunnerComponent } from './post/components/submit-post/code-runner/code-runner.component';
 import { LoginComponent } from './Authentication/components/login/login.component';
 import { PageNotFoundComponent } from './errors-page/components/page-not-found/page-not-found.component';
@@ -35,7 +36,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     SubmitPostComponent,
     SubmitTextComponent,
     SubmitImageVideoComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    ListPostComponent
   ],
   imports: [
     BrowserModule,

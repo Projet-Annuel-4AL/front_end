@@ -67,7 +67,7 @@ export class SubmitTextComponent{
   })
 
   submitPostForm() {
-
+    console.log(this.postForm);
   }
 
 }

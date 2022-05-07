@@ -8,12 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from "./shared/shared.module";
 import { CoreModule } from "./core/core.module";
 import { AppComponent } from './app.component';
+import { PostModule } from "./post/post.module";
+import { CreatePostComponent} from "./post/components/create-post/create-post.component";
 import { CodeRunnerComponent } from './post/components/submit-post/code-runner/code-runner.component';
 import { LoginComponent } from './Authentication/components/login/login.component';
 import { PageNotFoundComponent } from './errors-page/components/page-not-found/page-not-found.component';
 import { RegisterComponent } from './Authentication/components/register/register.component';
-import { ListPostComponent } from './post/components/list-post/list-post.component';
-import { CreatePostComponent } from './post/components/create-post/create-post.component';
 import { SubmitPostComponent } from './post/components/submit-post/submit-post.component';
 import { SubmitTextComponent } from './post/components/submit-post/submit-text/submit-text.component';
 import { SubmitImageVideoComponent } from './post/components/submit-post/submit-image-video/submit-image-video.component';
@@ -32,11 +32,10 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     LoginComponent,
     PageNotFoundComponent,
     RegisterComponent,
-    ListPostComponent,
-    CreatePostComponent,
     SubmitPostComponent,
     SubmitTextComponent,
-    SubmitImageVideoComponent
+    SubmitImageVideoComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +51,11 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    PostModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

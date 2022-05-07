@@ -4,7 +4,8 @@ import { LoginComponent } from './Authentication/components/login/login.componen
 import { RegisterComponent } from './Authentication/components/register/register.component';
 import { PageNotFoundComponent } from './errors-page/components/page-not-found/page-not-found.component';
 import { SubmitPostComponent } from './post/components/submit-post/submit-post.component';
-import { CreatePostComponent } from './post/components/create-post/create-post.component';
+import { PostComponent } from './post/post.component';
+import {CreatePostComponent} from "./post/components/create-post/create-post.component";
 
 const routes: Routes = [
   { path: '', component:  CreatePostComponent},

@@ -2,20 +2,24 @@
   <div class="form-group container text-center">
     <input type="text" class="form-control" id="title" formControlName="title" placeholder="Titre">
   </div>
-  <div class="container text-center">
-    <ngx-dropzone style="width: 600px; height: 250px;" [processDirectoryDrop]=true accept="image/jpeg,image/jpg,image/png,image/gif" (change)="onSelect($event)">
-      <ngx-dropzone-label>Glisser ou Choisir un fichier</ngx-dropzone-label>
-      <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-      </ngx-dropzone-preview>
+  <div class="form-group container text-center">
+    <ngx-dropzone (change)="onFilesAdded($event)" [multiple]=false [accept]="'image/jpeg,image/jpg,image/png,image/gif'">
+      <input type="file" class="file-input" formControlName="description" onchange="console.log(event.target.files)">
+      <ngx-dropzone-label>
+        <div>
+          <h1 class="bi bi-file-earmark-arrow-up-fill"></h1>
+          <h6> Glisser </h6>
+          <span> ou </span>
+          <h6> Choisisser un fichier </h6>
+        </div>
+      </ngx-dropzone-label>
+      <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)" for>
+      </ngx-dropzone-image-preview>
     </ngx-dropzone>
-    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-    </ngx-dropzone-image-preview>
   </div>
   <mat-card-actions>
     <div class="center">
-      <button type="submit" mat-raised-button color="primary">
+      <button type="submit" mat-raised-button color="primary" [disabled]="!postForm.valid" (click)="submitPostForm()">
         Valider
       </button>
     </div>

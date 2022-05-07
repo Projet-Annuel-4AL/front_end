@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-code-runner',
@@ -50,4 +51,10 @@ export class CodeRunnerComponent implements OnInit {
         this.output = response;
       })
   }
+
+  postForm = new FormGroup({
+    title: new FormControl(null, [
+      Validators.required
+    ])
+  })
 }

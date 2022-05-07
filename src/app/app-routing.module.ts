@@ -4,11 +4,11 @@ import { LoginComponent } from './Authentication/components/login/login.componen
 import { RegisterComponent } from './Authentication/components/register/register.component';
 import { PageNotFoundComponent } from './errors-page/components/page-not-found/page-not-found.component';
 import { SubmitPostComponent } from './post/components/submit-post/submit-post.component';
-import { PostComponent } from './post/post.component';
 import {CreatePostComponent} from "./post/components/create-post/create-post.component";
+import {ListPostComponent} from "./post/components/list-post/list-post.component";
 
 const routes: Routes = [
-  { path: '', component:  CreatePostComponent},
+  { path: '', component:  ListPostComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'submit', component: SubmitPostComponent },

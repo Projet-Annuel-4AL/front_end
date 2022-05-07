@@ -1,9 +1,33 @@
+<app-create-post></app-create-post>
 <div class="container d-flex align-items-center justify-content-center" style="margin-top: 20px;">
-  <div class="card border-light w-50">
-    <div class="card-body">
-      <h6 class="card-title">Seenix</h6>
-      <p class="card-text">Mon premier post !</p>
-    </div>
-    <div class="card-header">LIKE<i class="fa fa-thumbs-up"></i></div>
-  </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>Seenix</mat-card-subtitle>
+      <mat-card-subtitle>Posté il y a 30 min</mat-card-subtitle>
+      <mat-card-title>
+        <h5> Comment je gère mes projets en AL... </h5>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <img style="height: 300px" src="https://img.lemde.fr/2016/08/04/0/13/534/267/1440/720/60/0/a9b1471_17806-xsb5q2.jpg" alt="">
+    </mat-card-content>
+    <mat-card-footer>
+      <ul class="d-flex justify-content-sm-around">
+        <li>
+          <i class="bi bi-hand-thumbs-up"></i>
+          <span> J'aime</span>
+        </li>
+        <li>
+          <i class="bi bi-chat-left"></i>
+          <span> Commenter</span>
+        </li>
+        <li>
+          <i class="bi bi-arrow-90deg-right"></i>
+          <span> Partager </span>
+        </li>
+      </ul>
+    </mat-card-footer>
+  </mat-card>
 </div>
+

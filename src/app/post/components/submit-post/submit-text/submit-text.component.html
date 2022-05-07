@@ -1,0 +1,17 @@
+<mat-card-content>
+    <form [formGroup]="postForm">
+      <div class="form-group">
+        <input type="text" class="form-control" id="title" formControlName="title" placeholder="Titre">
+      </div>
+      <div class="form-group">
+        <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
+      </div>
+      <mat-card-actions>
+        <div class="center">
+          <button type="submit" mat-raised-button color="primary" [disabled]="!postForm.valid" (click)="submitPostForm()">
+            Valider
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+</mat-card-content>

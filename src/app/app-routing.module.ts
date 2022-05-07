@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './Authentication/components/login/login.component';
 import { RegisterComponent } from './Authentication/components/register/register.component';
 import { PageNotFoundComponent } from './errors-page/components/page-not-found/page-not-found.component';
 import { SubmitPostComponent } from './post/components/submit-post/submit-post.component';
-import {CreatePostComponent} from "./post/components/create-post/create-post.component";
 import {ListPostComponent} from "./post/components/list-post/list-post.component";
 
 const routes: Routes = [
   { path: '', component:  ListPostComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'auth', loadChildren:() => import("./Authentication/authentication.module").then(m => m.AuthenticationModule) },
   { path: 'submit', component: SubmitPostComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];

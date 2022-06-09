@@ -46,10 +46,12 @@ export class CodeRunnerComponent implements OnInit {
     if (this.language == 'java') lang = 0;
     const body = {language: lang, code: this.code};
     this.http
-      .post( "http://localhost:3000/compiler",body, {responseType: 'text'})
-      .subscribe(response => {
+      .post( "http://localhost:3000/compiler",body, {responseType: 'text'}).toPromise()
+      .then(response => {
         this.output = response;
       })
+      .catch( err => {
+        console.log(err)})
   }
 
   postForm = new FormGroup({

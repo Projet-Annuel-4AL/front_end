@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './Authentication/components/register/register.component';
 import { PageNotFoundComponent } from './errors-page/components/page-not-found/page-not-found.component';
 import { SubmitPostComponent } from './post/components/submit-post/submit-post.component';
 import {ListPostComponent} from "./post/components/list-post/list-post.component";

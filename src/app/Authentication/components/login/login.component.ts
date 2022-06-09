@@ -30,7 +30,7 @@ export class LoginComponent{
     console.log(this.loginForm.value);
     const body = {username: this.loginForm.value.mail, password: this.loginForm.value.password }
     this.http
-      .post("http://localhost:3000/auth/login", body).toPromise()
+      .post("http://localhost:3000/api/auth/login", body).toPromise()
       .then(response => {
 
         const tmp = JSON.stringify(response).split("\"");

@@ -18,7 +18,10 @@ import { SubmitTextComponent } from './post/components/submit-post/submit-text/s
 import { SubmitImageVideoComponent } from './post/components/submit-post/submit-image-video/submit-image-video.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import {TokenInterceptor} from "./token-interceptor";
-
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {DashboardModule} from "./dashboard/dashboard.module";
+import {JwtTokenService} from "./Authentication/services/jwt-token.service";
+import {LocalStorageService} from "./Authentication/services/local-storage.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import {TokenInterceptor} from "./token-interceptor";
     SubmitTextComponent,
     SubmitImageVideoComponent,
     CreatePostComponent,
-    ListPostComponent
+    ListPostComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -41,9 +45,10 @@ import {TokenInterceptor} from "./token-interceptor";
     SharedModule,
     CoreModule,
     NgxDropzoneModule,
-    PostModule
+    PostModule,
+    DashboardModule
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, JwtTokenService,LocalStorageService],
   exports: [],
   bootstrap: [AppComponent],
 })

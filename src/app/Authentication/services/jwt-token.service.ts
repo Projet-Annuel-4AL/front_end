@@ -33,7 +33,7 @@ export class JwtTokenService {
 
   getEmailId() {
     this.decodeToken();
-    return this.decodedToken ? this.decodedToken.email : null;
+    return this.decodedToken ? this.decodedToken.mail : null;
   }
 
   getExpiryTime() {

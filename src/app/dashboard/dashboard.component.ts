@@ -32,6 +32,10 @@ export class DashboardComponent implements OnInit {
       this.jwtTokenService.setToken(jwtTokenValue)
 
       this.getUser(this.jwtTokenService.getEmailId())
+
+      this.isLogged = true;
+    } else {
+      this.isLogged = false;
     }
 
   }

@@ -1,7 +1,16 @@
 <html class="h-100">
 <head></head>
 <body>
-<app-dashboard></app-dashboard>
+<app-authentication (isLogged)="setIsLogged($event)"></app-authentication>
+<ng-container>
+  <ng-template [ngIf]="isLogged" [ngIfElse]="loggedOut">
+    <app-dashboard-connected></app-dashboard-connected>
+  </ng-template>
+
+  <ng-template #loggedOut>
+    <app-dashboard-not-connected></app-dashboard-not-connected>
+  </ng-template>
+</ng-container>
 <router-outlet></router-outlet>
 <footer style="background-color: #673ab4">
   <div class="text-center p-4" style="color: white">

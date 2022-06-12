@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
+import {Post} from "../../service/Post";
+import {PostService} from "../../service/post.service";
 
 @Component({
   selector: 'app-list-post',
@@ -8,24 +9,24 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ListPostComponent implements OnInit {
 
-  title!: string;
-  date!: Date;
-  idContent!: number;
-  description!: string;
-  contentType!: string;
-  idUser!: number;
+  posts!: Post[];
 
-  constructor(private http: HttpClient) { }
-
-  ngOnInit(): void {
-    this.http
-      .get<any>( "http://localhost:3000/posts").toPromise()
-      .then(response => {
-        console.log(response)
-      })
-      .catch( err => {
-        console.log(err)
-      })
+  constructor(private _postService: PostService) {
   }
 
+  ngOnInit() {
+    this._postService.getPosts().subscribe(posts => {
+        this.posts = posts;
+        if (this.posts.length > 0) {
+          console.log("works")
+        }
+      }
+    );
+  }
+
+  addPost(posts: Post[]): void {
+    for (let post in posts) {
+      this.posts.push(posts[post])
+    }
+  }
 }

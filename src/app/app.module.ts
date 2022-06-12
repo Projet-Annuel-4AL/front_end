@@ -18,10 +18,11 @@ import { SubmitTextComponent } from './post/components/submit-post/submit-text/s
 import { SubmitImageVideoComponent } from './post/components/submit-post/submit-image-video/submit-image-video.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import {TokenInterceptor} from "./token-interceptor";
-import { DashboardComponent } from './dashboard/dashboard.component';
-import {DashboardModule} from "./dashboard/dashboard.module";
 import {JwtTokenService} from "./Authentication/services/jwt-token.service";
 import {LocalStorageService} from "./Authentication/services/local-storage.service";
+import {AuthenticationModule} from "./Authentication/authentication.module";
+import {DashboardConnectedComponent} from "./dashboard/dashboard-connected/dashboard-connected.component";
+import {DashboardNotConnectedComponent} from "./dashboard/dashboard-not-connected/dashboard-not-connected.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {LocalStorageService} from "./Authentication/services/local-storage.servi
     SubmitImageVideoComponent,
     CreatePostComponent,
     ListPostComponent,
-    DashboardComponent
+    DashboardConnectedComponent,
+    DashboardNotConnectedComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import {LocalStorageService} from "./Authentication/services/local-storage.servi
     CoreModule,
     NgxDropzoneModule,
     PostModule,
-    DashboardModule
+    AuthenticationModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, JwtTokenService,LocalStorageService],
   exports: [],

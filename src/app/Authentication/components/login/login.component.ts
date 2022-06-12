@@ -36,7 +36,9 @@ export class LoginComponent{
         this.token = tmp[3];
 
         this.localStorage.set("JWTToken", this.token);
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('').then(() => {
+          window.location.reload()
+        });
       })
       .catch(err => {
         return false

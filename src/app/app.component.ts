@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontEnd';
+  isLogged! : boolean
+
+  setIsLogged($event : boolean){
+    this.isLogged = $event
+  }
 }

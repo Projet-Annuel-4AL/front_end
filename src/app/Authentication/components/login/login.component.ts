@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {LocalStorageService} from "../../services/local-storage.service";
 import {Router} from "@angular/router";
+import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-login',
@@ -27,21 +27,20 @@ export class LoginComponent{
   }
 
   submitLoginForm() {
-    console.log(this.loginForm.value);
     const body = {username: this.loginForm.value.mail, password: this.loginForm.value.password }
     this.http
-      .post("http://localhost:3000/auth/login", body).toPromise()
+      .post("http://localhost:3000/api/auth/login", body).toPromise()
       .then(response => {
 
         const tmp = JSON.stringify(response).split("\"");
         this.token = tmp[3];
-        console.log("----------response----------");
-        console.log(this.token);
+
         this.localStorage.set("JWTToken", this.token);
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('').then(() => {
+          window.location.reload()
+        });
       })
       .catch(err => {
-        console.log(err);
         return false
       });
   }

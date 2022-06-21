@@ -1,7 +1,8 @@
 import { Component} from '@angular/core';
 import {AngularEditorConfig} from "@kolkov/angular-editor";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MatMenu} from "@angular/material/menu";
+import {CreateText} from "../../../post-body/create-text.dto";
+import {PostService} from "../../../service/post.service";
 
 @Component({
   selector: 'app-submit-text',
@@ -9,6 +10,10 @@ import {MatMenu} from "@angular/material/menu";
   styleUrls: ['./submit-text.component.scss']
 })
 export class SubmitTextComponent{
+
+
+  constructor(private postService: PostService) {
+  }
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -67,7 +72,8 @@ export class SubmitTextComponent{
   })
 
   submitPostForm() {
-    console.log(this.postForm);
+    const createdText: CreateText = new CreateText(this.postForm.value.description);
+    this.postService.addText(createdText, this.postForm.value.title).subscribe()
   }
 
 }

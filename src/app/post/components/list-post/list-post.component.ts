@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Post} from "../../service/Post";
+import {Post} from "../../domain/Post";
 import {PostService} from "../../service/post.service";
 
 @Component({
@@ -17,9 +17,7 @@ export class ListPostComponent implements OnInit {
   ngOnInit() {
     this._postService.getPosts().subscribe(posts => {
         this.posts = posts;
-        if (this.posts.length > 0) {
-          console.log("works")
-        }
+        if (this.posts.length > 0) {}
       }
     );
   }

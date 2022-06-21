@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {CreateCode} from "../../../post-body/create-code.dto";
+import {PostService} from "../../../service/post.service";
 
 @Component({
   selector: 'app-code-runner',
@@ -10,14 +12,25 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class CodeRunnerComponent implements OnInit {
   title!: string;
   language!: string;
+  langNumber!: number;
   theme!: string;
   code!: string;
   editorOptions!: any;
   output!: string;
 
-  constructor(private http: HttpClient) { }
+  postForm = new FormGroup({
+    title: new FormControl(null, [
+      Validators.required
+    ]),
+    code: new FormControl(null, [
+      Validators.required
+    ])
+  })
+
+  constructor(private http: HttpClient, private postService: PostService) { }
 
   ngOnInit(): void {
+    this.title = '';
     this.language = 'java';
     this.theme = 'vs-dark'
     this.editorOptions = {readOnly: false, theme: this.theme, language: this.language, automaticLayout: true};
@@ -39,14 +52,17 @@ export class CodeRunnerComponent implements OnInit {
     this.code = '#include <iostream>\nint main() {\n\tstd::cout << "Hello C++!\\n";\n\treturn 0;\n}'
   }
 
+  getLangNumber() {
+    if (this.language == 'python') this.langNumber = 1;
+    if (this.language == 'cpp') this.langNumber = 2;
+    if (this.language == 'java') this.langNumber = 0;
+  }
   onRunCode(){
-    let lang: number = 0;
-    if (this.language == 'python') lang = 1;
-    if (this.language == 'cpp') lang = 2;
-    if (this.language == 'java') lang = 0;
-    const body = {language: lang, code: this.code};
+    this.getLangNumber()
+    const body = {language: this.langNumber, code: this.code};
+
     this.http
-      .post( "http://localhost:3000/compiler",body, {responseType: 'text'}).toPromise()
+      .post( "http://localhost:3000/api/compiler",body, {responseType: 'text'}).toPromise()
       .then(response => {
         this.output = response;
       })
@@ -54,9 +70,9 @@ export class CodeRunnerComponent implements OnInit {
         console.log(err)})
   }
 
-  postForm = new FormGroup({
-    title: new FormControl(null, [
-      Validators.required
-    ])
-  })
+  submitPostForm() {
+    this.getLangNumber()
+    const createCode: CreateCode = new CreateCode(this.langNumber, this.code);
+    this.postService.addCode(createCode, this.title).subscribe();
+  }
 }

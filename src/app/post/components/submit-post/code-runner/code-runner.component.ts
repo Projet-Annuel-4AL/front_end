@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import {CreateCode} from "../../../post-body/create-code.dto";
 import {PostService} from "../../../service/post.service";
 
@@ -17,15 +17,9 @@ export class CodeRunnerComponent implements OnInit {
   code!: string;
   editorOptions!: any;
   output!: string;
+  codeRunne: boolean = false;
 
-  postForm = new FormGroup({
-    title: new FormControl(null, [
-      Validators.required
-    ]),
-    code: new FormControl(null, [
-      Validators.required
-    ])
-  })
+  postForm!: FormGroup;
 
   constructor(private http: HttpClient, private postService: PostService) { }
 
@@ -58,6 +52,7 @@ export class CodeRunnerComponent implements OnInit {
     if (this.language == 'java') this.langNumber = 0;
   }
   onRunCode(){
+    this.codeRunne = false;
     this.getLangNumber()
     const body = {language: this.langNumber, code: this.code};
 
@@ -65,14 +60,25 @@ export class CodeRunnerComponent implements OnInit {
       .post( "http://localhost:3000/api/compiler",body, {responseType: 'text'}).toPromise()
       .then(response => {
         this.output = response;
+        this.codeRunne = true;
       })
       .catch( err => {
-        console.log(err)})
+        console.log(err)
+      });
   }
 
-  submitPostForm() {
+  isNotValidPost(): boolean{
+    if(this.codeRunne){
+      if (this.title.length > 0){
+        return false
+      }
+    }
+    return true;
+  }
+
+  submitPostForm(title: string) {
     this.getLangNumber()
     const createCode: CreateCode = new CreateCode(this.langNumber, this.code);
-    this.postService.addCode(createCode, this.title).subscribe();
+    this.postService.addCode(createCode, title).subscribe();
   }
 }

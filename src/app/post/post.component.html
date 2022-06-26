@@ -20,8 +20,10 @@
           <mat-card-footer style="padding-bottom: 10px">
             <ul class="d-flex justify-content-sm-around">
               <li>
-                <i class="bi bi-hand-thumbs-up"></i>
-                <span> J'aime</span>
+                <button mat-button>
+                  <mat-icon>thumb_up</mat-icon>
+                  J'aime
+                </button>
               </li>
               <li>
                 <button mat-button routerLink="post/comment">
@@ -30,8 +32,10 @@
                 </button>
               </li>
               <li>
-                <i class="bi bi-arrow-90deg-right"></i>
-                <span> Partager </span>
+                <button mat-button>
+                  <mat-icon>share</mat-icon>
+                  Partager
+                </button>
               </li>
             </ul>
           </mat-card-footer>

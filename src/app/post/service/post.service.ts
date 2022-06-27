@@ -12,21 +12,35 @@ import {Code} from "../post-body/domain/code.entity";
 
 @Injectable()
 export class PostService {
-  private _url: string = "http://localhost:3000/api/posts";
+  private _url: string = "http://localhost:3000/api/posts/";
 
   constructor(private http: HttpClient) {
   }
 
   getPosts() {
     return new Observable<Post[]>((observer) => {
-      this.http.get(this._url).subscribe((result: any) => {
+      this.http.get(this._url).subscribe((results: any) => {
         const posts = [];
-        for (const jsonPosts of result) {
-          const post = new Post();
-          post.loadFromJson(jsonPosts);
+        for (const result of results) {
+          const post = new Post(result.id,result.title,result.idVideo,result.idPicture,result.idText,result.idCode,result.idUser);
           posts.push(post);
         }
         observer.next(posts);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      })
+    });
+  }
+
+  getPostById(idPost: number) {
+    return new Observable<Post>((observer) => {
+      this.http.get(this._url + idPost).subscribe((result: any) => {
+        console.log(result)
+        const post = new Post(result.id,result.title,result.idVideo,result.idPicture,result.idText,result.idCode,result.idUser);
+        post.loadFromJson(result);
+        observer.next(post);
         observer.complete();
       }, error => {
         observer.error(error);

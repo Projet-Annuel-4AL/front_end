@@ -6,8 +6,8 @@ import {RemarksPostComponent} from "./components/remarks-post/remarks-post.compo
 
 const routes: Routes = [
   { path: '', component: PostComponent},
-  { path: 'submit', component: SubmitPostComponent },
-  { path: 'remark', component: RemarksPostComponent }
+  { path: 'submit-post', component: SubmitPostComponent },
+  { path: 'remark-post/:idPost', component: RemarksPostComponent }
 ];
 
 @NgModule({

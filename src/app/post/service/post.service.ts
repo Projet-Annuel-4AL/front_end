@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Post} from "../domain/Post";
+import {Post} from "../domain/post.entity";
 import {Injectable} from "@angular/core";
 import {CreateCode} from "../post-body/create-code.dto";
 import {CreateText} from "../post-body/create-text.dto";
@@ -22,7 +22,7 @@ export class PostService {
       this.http.get(this._url).subscribe((results: any) => {
         const posts = [];
         for (const result of results) {
-          const post = new Post(result.id,result.title,result.idVideo,result.idPicture,result.idText,result.idCode,result.idUser);
+          const post = new Post(result.id,result.title,result.idVideo,result.idPicture,result.text,result.code,result.user);
           posts.push(post);
         }
         observer.next(posts);
@@ -37,7 +37,7 @@ export class PostService {
   getPostById(idPost: number) {
     return new Observable<Post>((observer) => {
       this.http.get(this._url + idPost).subscribe((result: any) => {
-        const post = new Post(result.id,result.title,result.idVideo,result.idPicture,result.idText,result.idCode,result.idUser);
+        const post = new Post(result.id,result.title,result.idVideo,result.idPicture,result.text,result.code,result.user);
         observer.next(post);
         observer.complete();
       }, error => {

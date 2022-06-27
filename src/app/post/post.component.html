@@ -5,8 +5,8 @@
       <li>
         <mat-card>
           <mat-card-header>
-            <mat-card-subtitle>Seenix</mat-card-subtitle>
-            <mat-card-subtitle>Posté il y a 30 min </mat-card-subtitle>
+            <mat-card-subtitle> {{ post.user.firstName }} </mat-card-subtitle>
+            <mat-card-subtitle>{{post.createdDate.toDateString()}} </mat-card-subtitle>
             <mat-card-title>
               <h5> {{post.title}}</h5>
             </mat-card-title>

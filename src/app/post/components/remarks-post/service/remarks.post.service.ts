@@ -1,7 +1,7 @@
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Remarks} from "../domain/Remarks";
+import {Remark} from "../domain/remark.entity";
 
 @Injectable()
 export class RemarksPostService {
@@ -11,12 +11,12 @@ export class RemarksPostService {
   }
 
   getRemarksByIdPost(idPost: number) {
-    return new Observable<Remarks[]>((observer) => {
+    return new Observable<Remark[]>((observer) => {
       this.http.get(this._url + idPost).subscribe((results: any) => {
         const remarks = [];
         for (const result of results) {
           console.log(results)
-          const remark = new Remarks(result.id, result.idParentRemark, result.post, result.content);
+          const remark = new Remark(result.id, result.idParentRemark, result.post, result.content);
           remarks.push(remark);
         }
         observer.next(remarks);

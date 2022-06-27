@@ -1,6 +1,6 @@
 import {Post} from "../../../domain/post.entity";
 
-export class Remarks {
+export class Remark {
   idRemark: number;
   idParentRemark: number;
   post: Post;

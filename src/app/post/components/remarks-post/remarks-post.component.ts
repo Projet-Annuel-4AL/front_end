@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {PostService} from "../../service/post.service";
 import {Post} from "../../domain/post.entity";
-import {Remarks} from "./domain/Remarks";
+import {Remark} from "./domain/remark.entity";
 import {RemarksPostService} from "./service/remarks.post.service";
 
 @Component({
@@ -12,10 +12,13 @@ import {RemarksPostService} from "./service/remarks.post.service";
 })
 export class RemarksPostComponent implements OnInit {
   post!: Post;
-  remarks!: Remarks[];
+  remarks!: Remark[];
 
-  constructor(private _postService: PostService, private _activatedRoute: ActivatedRoute, private _remarksService: RemarksPostService) {
-  }
+  constructor(
+    private _postService: PostService,
+    private _activatedRoute: ActivatedRoute,
+    private _remarksService: RemarksPostService
+  ) {}
 
   ngOnInit(): void {
     const routeParams = this._activatedRoute.snapshot.paramMap;
@@ -23,14 +26,8 @@ export class RemarksPostComponent implements OnInit {
 
     this._postService.getPostById(idPost).subscribe(post => {
       this.post = post;
-      if (this.post == null) {}
+      this.remarks = this.post.remarks;
     });
-
-    this._remarksService.getRemarksByIdPost(idPost).subscribe(remarks => {
-      this.remarks = remarks;
-      if(this.remarks == null){}
-
-    })
 
     console.log(this.remarks);
   }

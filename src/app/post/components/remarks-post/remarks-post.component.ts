@@ -28,8 +28,6 @@ export class RemarksPostComponent implements OnInit {
       this.post = post;
       this.remarks = this.post.remarks;
     });
-
-    console.log(this.remarks);
   }
 
 }

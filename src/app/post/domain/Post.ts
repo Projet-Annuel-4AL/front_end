@@ -8,7 +8,7 @@ export class Post {
   idCode: number;
   idUser: number;
 
-  constructor(idPost = 0,title = '', idVideo = 0, idPicture =0, idText =0, idCode=0, idUser=0) {
+  constructor(idPost: number,title: string, idVideo: number, idPicture: number, idText: number, idCode: number, idUser: number) {
     this.idPost = idPost;
     this.title = title;
     this.createdDate = new Date();

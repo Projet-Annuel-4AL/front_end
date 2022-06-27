@@ -1,9 +1,8 @@
 export class User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  mail: string;
-
+  readonly id: number;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly mail: string;
 
   constructor() {
     this.id = 0;

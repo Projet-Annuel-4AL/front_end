@@ -1,3 +1,5 @@
+import {User} from "../../user/domain/user.entity";
+
 export class Post {
   idPost: number;
   title: string;

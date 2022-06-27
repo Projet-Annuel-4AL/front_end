@@ -13,6 +13,7 @@ import {RemarksPostService} from "./service/remarks.post.service";
 export class RemarksPostComponent implements OnInit {
   post!: Post;
   remarks!: Remark[];
+  editorOptions!: any;
 
   constructor(
     private _postService: PostService,
@@ -23,6 +24,7 @@ export class RemarksPostComponent implements OnInit {
   ngOnInit(): void {
     const routeParams = this._activatedRoute.snapshot.paramMap;
     const idPost = Number(routeParams.get('idPost'));
+    this.editorOptions = {readOnly: true, theme: 'vs-dark', language: 'java', automaticLayout: true};
 
     this._postService.getPostById(idPost).subscribe(post => {
       this.post = post;

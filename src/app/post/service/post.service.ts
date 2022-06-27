@@ -22,7 +22,16 @@ export class PostService {
       this.http.get(this._url).subscribe((results: any) => {
         const posts = [];
         for (const result of results) {
-          const post = new Post(result.id,result.title,result.idVideo,result.idPicture,result.text,result.code,result.user, result.remarks);
+          const post = new Post(
+            result.id,
+            result.title,
+            result.createdDate,
+            result.idVideo,
+            result.idPicture,
+            result.text,
+            result.code,
+            result.user,
+            result.remarks);
           posts.push(post);
         }
         observer.next(posts);
@@ -37,7 +46,16 @@ export class PostService {
   getPostById(idPost: number) {
     return new Observable<Post>((observer) => {
       this.http.get(this._url + idPost).subscribe((result: any) => {
-        const post = new Post(result.id,result.title,result.idVideo,result.idPicture,result.text,result.code,result.user, result.remarks);
+        const post = new Post(
+          result.id,
+          result.title,
+          result.createdDate,
+          result.idVideo,
+          result.idPicture,
+          result.text,
+          result.code,
+          result.user,
+          result.remarks);
         observer.next(post);
         observer.complete();
       }, error => {

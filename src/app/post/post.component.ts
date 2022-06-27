@@ -9,6 +9,8 @@ import {PostService} from "./service/post.service";
 })
 export class PostComponent implements OnInit {
   posts!: Post[];
+  editorOptions!: any;
+
 
   constructor(private _postService: PostService) {
   }
@@ -16,6 +18,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this._postService.getPosts().subscribe(posts => {
         this.posts = posts;
+        this.editorOptions = {readOnly: true, theme: 'vs-dark', language: 'java', automaticLayout: true};
         if (this.posts.length > 0) {}
       }
     );

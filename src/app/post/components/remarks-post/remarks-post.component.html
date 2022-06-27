@@ -2,8 +2,8 @@
 <div class="container d-flex align-items-center justify-content-center" style="margin-top: 20px;">
   <mat-card>
     <mat-card-header>
-      <mat-card-subtitle>Seenix</mat-card-subtitle>
-      <mat-card-subtitle>Posté il y a 30 min</mat-card-subtitle>
+      <mat-card-subtitle>{{post.user.firstName}}</mat-card-subtitle>
+      <mat-card-subtitle>Posté le {{post.createdDate.toDateString()}}</mat-card-subtitle>
       <mat-card-title>
         <h5> {{post.title}}</h5>
       </mat-card-title>
@@ -20,7 +20,7 @@
   <ul *ngFor=" let remark of remarks">
     {{remark.content}}
   </ul>
-  <mat-card-subtitle>Seenix, il y a 30 min</mat-card-subtitle>
+  <mat-card-subtitle>{{post.user.firstName}}, le {{post.createdDate.toDateString()}}</mat-card-subtitle>
   <mat-card-content>
     <p>petit test</p>
   </mat-card-content>

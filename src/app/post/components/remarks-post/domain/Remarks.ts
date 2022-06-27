@@ -1,13 +1,15 @@
+import {Post} from "../../../domain/post.entity";
+
 export class Remarks {
   idRemark: number;
   idParentRemark: number;
-  idPost: number;
+  post: Post;
   content: string;
 
-  constructor(idRemark: number,idParentRemark: number, idPost: number, content: string) {
+  constructor(idRemark: number,idParentRemark: number, post: Post, content: string) {
     this.idRemark = idRemark;
     this.idParentRemark = idParentRemark;
-    this.idPost = idPost;
+    this.post = post;
     this.content = content;
   }
 }

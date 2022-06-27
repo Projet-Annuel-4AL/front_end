@@ -16,7 +16,7 @@ export class RemarksPostService {
         const remarks = [];
         for (const result of results) {
           console.log(results)
-          const remark = new Remarks(result.id, result.idParentRemark, result.idPost, result.content);
+          const remark = new Remarks(result.id, result.idParentRemark, result.post, result.content);
           remarks.push(remark);
         }
         observer.next(remarks);

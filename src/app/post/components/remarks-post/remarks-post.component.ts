@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {PostService} from "../../service/post.service";
-import {Post} from "../../domain/Post";
+import {Post} from "../../domain/post.entity";
 import {Remarks} from "./domain/Remarks";
 import {RemarksPostService} from "./service/remarks.post.service";
 

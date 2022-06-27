@@ -12,6 +12,7 @@ import {CodeRunnerComponent} from "./components/submit-post/code-runner/code-run
 import {AngularEditorModule} from "@kolkov/angular-editor";
 import {CreatePostComponent} from "./components/create-post/create-post.component";
 import { RemarksPostComponent } from './components/remarks-post/remarks-post.component';
+import {RemarksPostService} from "./components/remarks-post/service/remarks.post.service";
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { RemarksPostComponent } from './components/remarks-post/remarks-post.com
     PostComponent,
     CreatePostComponent
   ],
-  providers:[PostService],
+  providers:[PostService, RemarksPostService],
     imports: [
         SharedModule,
         PostRoutingModule,

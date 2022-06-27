@@ -37,9 +37,7 @@ export class PostService {
   getPostById(idPost: number) {
     return new Observable<Post>((observer) => {
       this.http.get(this._url + idPost).subscribe((result: any) => {
-        console.log(result)
         const post = new Post(result.id,result.title,result.idVideo,result.idPicture,result.idText,result.idCode,result.idUser);
-        post.loadFromJson(result);
         observer.next(post);
         observer.complete();
       }, error => {

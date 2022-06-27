@@ -1,15 +1,28 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-subtitle>Seenix</mat-card-subtitle>
-    <mat-card-subtitle>Posté il y a 30 min </mat-card-subtitle>
-    <mat-card-title>
-      <h5> {{post.title}}</h5>
-    </mat-card-title>
-  </mat-card-header>
+<div>
+<div class="container d-flex align-items-center justify-content-center" style="margin-top: 20px;">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>Seenix</mat-card-subtitle>
+      <mat-card-subtitle>Posté il y a 30 min</mat-card-subtitle>
+      <mat-card-title>
+        <h5> {{post.title}}</h5>
+      </mat-card-title>
+    </mat-card-header>
 
+    <mat-card-content>
+      <img style="height: 300px"
+           src="https://img.lemde.fr/2016/08/04/0/13/534/267/1440/720/60/0/a9b1471_17806-xsb5q2.jpg"
+           alt="">
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-card class="" style="margin-top: 10px;">
+  <ul *ngFor=" let remark of remarks">
+    {{remark.content}}
+  </ul>
+  <mat-card-subtitle>Seenix, il y a 30 min</mat-card-subtitle>
   <mat-card-content>
-    <img style="height: 300px"
-         src="https://img.lemde.fr/2016/08/04/0/13/534/267/1440/720/60/0/a9b1471_17806-xsb5q2.jpg"
-         alt="">
+    <p>petit test</p>
   </mat-card-content>
 </mat-card>
+</div>

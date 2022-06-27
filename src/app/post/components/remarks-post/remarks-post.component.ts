@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {PostService} from "../../service/post.service";
 import {Post} from "../../domain/Post";
-import {Observable} from "rxjs";
+import {Remarks} from "./domain/Remarks";
+import {RemarksPostService} from "./service/remarks.post.service";
 
 @Component({
   selector: 'app-remarks-post',
@@ -11,8 +12,9 @@ import {Observable} from "rxjs";
 })
 export class RemarksPostComponent implements OnInit {
   post!: Post;
+  remarks!: Remarks[];
 
-  constructor(private _postService: PostService, private _activatedRoute: ActivatedRoute) {
+  constructor(private _postService: PostService, private _activatedRoute: ActivatedRoute, private _remarksService: RemarksPostService) {
   }
 
   ngOnInit(): void {
@@ -24,7 +26,13 @@ export class RemarksPostComponent implements OnInit {
       if (this.post == null) {}
     });
 
-    console.log(this.post);
+    this._remarksService.getRemarksByIdPost(idPost).subscribe(remarks => {
+      this.remarks = remarks;
+      if(this.remarks == null){}
+
+    })
+
+    console.log(this.remarks);
   }
 
 }

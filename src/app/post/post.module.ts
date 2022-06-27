@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from "../shared/shared.module";
 import { PostComponent } from './post.component';
 import {PostService} from "./service/post.service";
-import { CommentComponent } from './components/comment/comment.component';
 import {PostRoutingModule} from "./post-routing.module";
 import {SubmitPostComponent} from "./components/submit-post/submit-post.component";
 import {SubmitTextComponent} from "./components/submit-post/submit-text/submit-text.component";
@@ -12,17 +11,18 @@ import {MonacoEditorModule} from "ngx-monaco-editor";
 import {CodeRunnerComponent} from "./components/submit-post/code-runner/code-runner.component";
 import {AngularEditorModule} from "@kolkov/angular-editor";
 import {CreatePostComponent} from "./components/create-post/create-post.component";
+import { RemarksPostComponent } from './components/remarks-post/remarks-post.component';
 
 
 @NgModule({
   declarations: [
     PostComponent,
     CreatePostComponent,
-    CommentComponent,
     SubmitPostComponent,
     SubmitTextComponent,
     SubmitImageVideoComponent,
     CodeRunnerComponent,
+    RemarksPostComponent,
   ],
   exports: [
     PostComponent,

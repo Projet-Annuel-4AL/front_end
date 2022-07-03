@@ -27,9 +27,18 @@
   <ul *ngFor=" let remark of remarks">
     {{remark.content}}
   </ul>
-  <mat-card-subtitle>{{post.user.firstName}}, le {{post.createdDate}}</mat-card-subtitle>
-  <mat-card-content>
-    <p>petit test</p>
-  </mat-card-content>
+
+  <form [formGroup]="commentForm">
+    <div class="card border-light w-50">
+      <div class="card-body">
+        <input type="text" class="form-control" id="content" formControlName="content" aria-describedby="emailHelp"
+               placeholder="Ecrire Un Commentaire">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!commentForm.valid"
+                (click)="submitCommentForm()">
+          Publier
+        </button>
+      </div>
+    </div>
+  </form>
 </mat-card>
 </div>

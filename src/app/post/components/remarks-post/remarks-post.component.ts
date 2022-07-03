@@ -5,6 +5,11 @@ import {Post} from "../../domain/post.entity";
 import {Remark} from "./domain/remark.entity";
 import {RemarksPostService} from "./service/remarks.post.service";
 import {HttpClient} from "@angular/common/http";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {JwtTokenService} from "../../../Authentication/services/jwt-token.service";
+import {CreateRemark} from "./domain/create-remark.dto";
+import {CreatePost} from "../../domain/create-post.dto";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-remarks-post',
@@ -19,11 +24,21 @@ export class RemarksPostComponent implements OnInit {
   code!: string;
   output!: string;
   editorOptions!: any;
+  commentForm =  new FormGroup({
+    content: new FormControl(null, [
+      Validators.required
+    ]),
+    postId: new FormControl(null, [
+    ])
+  });
+
+
 
   constructor(
     private _postService: PostService,
     private _activatedRoute: ActivatedRoute,
     private _remarksService: RemarksPostService,
+    private _jwtTokenService: JwtTokenService,
     private http: HttpClient
   ) {}
 
@@ -62,4 +77,27 @@ export class RemarksPostComponent implements OnInit {
         console.log(err)
       });
   }
+
+  /*submitCommentForm(idPost: number) {
+    const remark = new CreateRemark(idPost, Number(this._jwtTokenService.getIdUser()), this.commentForm.value.content);
+    //const body = {content: this.commentForm.value.content, idPost: idPost, idUser: Number(this._jwtTokenService.getIdUser())}
+    console.log(remark);
+    this.http
+      .post( "localhost:3000/api/remarks",remark, {responseType: 'text'}).toPromise()
+      .then(response => {
+        this.output = response;
+      })
+      .catch( err => {
+        console.log(err)
+      });
+  }*/
+  submitCommentForm() {
+    const remark = new CreateRemark(this.post.idPost, Number(this._jwtTokenService.getIdUser()), this.commentForm.value.content);
+    console.log(remark);
+    return this.http.post("localhost:3000/api/remarks", remark).subscribe((result: any) => {
+        console.log(result)
+    });
+  }
+
+
 }

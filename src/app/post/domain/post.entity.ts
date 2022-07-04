@@ -2,6 +2,7 @@ import {User} from "../../user/domain/user.entity";
 import {Text} from "../post-body/domain/text.entity";
 import {Code} from "../post-body/domain/code.entity";
 import {Remark} from "../components/remarks-post/domain/remark.entity";
+import {Like} from "../components/like/domain/like.entity";
 
 export class Post {
   readonly idPost: number;
@@ -13,8 +14,9 @@ export class Post {
   readonly code: Code;
   readonly user: User;
   readonly remarks: Remark[];
+  readonly likes: Like[];
 
-  constructor(idPost: number,title: string, createdDate: Date, idVideo: number, idPicture: number, text: Text, code: Code, user: User, remarks: Remark[]) {
+  constructor(idPost: number,title: string, createdDate: Date, idVideo: number, idPicture: number, text: Text, code: Code, user: User, remarks: Remark[], likes: Like[]) {
     this.idPost = idPost;
     this.title = title;
     this.createdDate = createdDate;
@@ -24,5 +26,6 @@ export class Post {
     this.code = code;
     this.user = user;
     this.remarks = remarks
+    this.likes = likes
   }
 }

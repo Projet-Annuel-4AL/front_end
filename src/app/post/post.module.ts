@@ -13,6 +13,7 @@ import {AngularEditorModule} from "@kolkov/angular-editor";
 import {CreatePostComponent} from "./components/create-post/create-post.component";
 import { RemarksPostComponent } from './components/remarks-post/remarks-post.component';
 import {RemarksPostService} from "./components/remarks-post/service/remarks.post.service";
+import {UserService} from "../user/service/user.service";
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import {RemarksPostService} from "./components/remarks-post/service/remarks.post
     PostComponent,
     CreatePostComponent
   ],
-  providers:[PostService, RemarksPostService],
+  providers:[PostService, RemarksPostService, UserService],
     imports: [
         SharedModule,
         PostRoutingModule,

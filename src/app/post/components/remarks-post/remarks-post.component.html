@@ -25,7 +25,10 @@
 </div>
 <mat-card class="" style="margin-top: 10px;">
   <ul *ngFor=" let remark of remarks">
-    {{remark.content}}
+    <div class="card border-light w-50">
+      <mat-card-subtitle>{{remark.content}}</mat-card-subtitle>
+      {{remark.content}}
+    </div>
   </ul>
 
   <form [formGroup]="commentForm">

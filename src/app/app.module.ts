@@ -15,6 +15,7 @@ import {AuthenticationModule} from "./Authentication/authentication.module";
 import {DashboardConnectedComponent} from "./dashboard/dashboard-connected/dashboard-connected.component";
 import {DashboardNotConnectedComponent} from "./dashboard/dashboard-not-connected/dashboard-not-connected.component";
 
+
 @NgModule({
   declarations: [
     AppComponent,

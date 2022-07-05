@@ -59,7 +59,6 @@ export class RemarksPostComponent implements OnInit {
         this.output = response;
       })
       .catch( err => {
-        console.log(err)
       });
   }
 }

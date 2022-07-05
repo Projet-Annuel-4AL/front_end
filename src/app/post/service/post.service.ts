@@ -31,7 +31,8 @@ export class PostService {
             result.text,
             result.code,
             result.user,
-            result.remarks);
+            result.remarks,
+            result.likes);
           posts.push(post);
         }
         observer.next(posts);
@@ -55,7 +56,8 @@ export class PostService {
           result.text,
           result.code,
           result.user,
-          result.remarks);
+          result.remarks,
+          result.likes);
         observer.next(post);
         observer.complete();
       }, error => {

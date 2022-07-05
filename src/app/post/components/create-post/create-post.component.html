@@ -1,8 +1,10 @@
-<div class="container d-flex align-items-center justify-content-center" style="margin-top: 20px;">
-  <div class="card border-light w-50">
-    <div class="card-body">
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-             placeholder="Ecrire Un Message" routerLink="/submit-post">
+<ng-template [ngIf]="isConnected == true">
+  <div class="container d-flex align-items-center justify-content-center" style="margin-top: 20px;">
+    <div class="card border-light w-50">
+      <div class="card-body">
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+               placeholder="Ecrire Un Message" routerLink="/submit-post">
+      </div>
     </div>
   </div>
-</div>
+</ng-template>

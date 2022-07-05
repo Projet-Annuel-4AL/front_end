@@ -28,6 +28,7 @@ export class RemarksPostComponent implements OnInit {
       Validators.required
     ])
   });
+  isConnected: boolean | undefined;
 
 
 
@@ -44,8 +45,10 @@ export class RemarksPostComponent implements OnInit {
     const routeParams = this._activatedRoute.snapshot.paramMap;
     const idPost = Number(routeParams.get('idPost'));
     this.language = 'java';
-    this.theme = 'vs-dark'
+    this.theme = 'vs-dark';
+    this.isConnected = false;
     this.editorOptions = {readOnly: true, theme: this.theme, language: this.language, automaticLayout: true};
+    if (this._jwtTokenService.getIdUser() != null){this.isConnected = true;}
 
     this._postService.getPostById(idPost).subscribe(post => {
       this.post = post;

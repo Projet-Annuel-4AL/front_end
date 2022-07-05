@@ -33,6 +33,7 @@ export class PostService {
             result.user,
             result.remarks,
             result.likes);
+          post.numberOfRemarks = result.remarks.length;
           posts.push(post);
         }
         observer.next(posts);

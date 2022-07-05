@@ -8,9 +8,6 @@ import {HttpClient} from "@angular/common/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {JwtTokenService} from "../../../Authentication/services/jwt-token.service";
 import {CreateRemark} from "./domain/create-remark.dto";
-import {CreatePost} from "../../domain/create-post.dto";
-import {Observable} from "rxjs";
-import {User} from "../../../user/domain/user.entity";
 import {UserService} from "../../../user/service/user.service";
 
 @Component({
@@ -53,6 +50,13 @@ export class RemarksPostComponent implements OnInit {
     this._postService.getPostById(idPost).subscribe(post => {
       this.post = post;
       this.remarks = this.post.remarks;
+
+      this.remarks.forEach((value)=>{
+        console.log(value.idUser);
+        this._userService.getUserByID(value.idUser).subscribe(user=>{
+          value.name= user.firstName;
+        });
+      })
       if (post.code !== null){
         this.code = post.code.content;
       }

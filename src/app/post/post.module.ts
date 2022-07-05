@@ -14,6 +14,9 @@ import {CreatePostComponent} from "./components/create-post/create-post.componen
 import { RemarksPostComponent } from './components/remarks-post/remarks-post.component';
 import {RemarksPostService} from "./components/remarks-post/service/remarks.post.service";
 import {UserService} from "../user/service/user.service";
+import {LikeComponent} from "./components/like/like.component";
+import {LikePostService} from "./components/like/service/like.post.service";
+
 
 
 @NgModule({
@@ -25,12 +28,13 @@ import {UserService} from "../user/service/user.service";
     SubmitImageVideoComponent,
     CodeRunnerComponent,
     RemarksPostComponent,
+    LikeComponent
   ],
   exports: [
     PostComponent,
     CreatePostComponent
   ],
-  providers:[PostService, RemarksPostService, UserService],
+  providers:[PostService, RemarksPostService, UserService, LikePostService],
     imports: [
         SharedModule,
         PostRoutingModule,

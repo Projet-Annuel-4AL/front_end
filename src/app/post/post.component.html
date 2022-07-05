@@ -23,14 +23,11 @@
           <mat-card-footer style="padding-bottom: 10px">
             <ul class="d-flex justify-content-sm-around">
               <li>
-                <button mat-button>
-                  <mat-icon>thumb_up</mat-icon>
-                  J'aime
-                </button>
+                <app-like [post]="post"></app-like>
               </li>
               <li>
                 <a mat-button [routerLink]="['/remark-post/', post.idPost]">
-                  <mat-icon>mode_comment</mat-icon>
+                  <mat-icon>mode_comment </mat-icon>
                   Commentaires
                 </a>
               </li>

@@ -45,10 +45,4 @@ export class JwtTokenService {
     this.decodeToken();
     return this.decodedToken ? this.decodedToken.exp : null;
   }
-
-  getIdUser() {
-    this.decodeToken();
-    return this.decodedToken ? this.decodedToken.sub : null;
-  }
-
 }

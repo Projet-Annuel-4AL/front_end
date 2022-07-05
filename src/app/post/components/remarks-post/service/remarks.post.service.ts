@@ -19,7 +19,6 @@ export class RemarksPostService {
       this.http.get(this._url + idPost).subscribe((results: any) => {
         const remarks = [];
         for (const result of results) {
-          console.log(results)
           const remark = new Remark(result.id, result.idParentRemark, result.post, result.content);
           remarks.push(remark);
         }

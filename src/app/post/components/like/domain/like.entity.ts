@@ -3,7 +3,6 @@ export class Like {
   readonly idUser: number;
   readonly idPost: number;
 
-
   constructor(idLike: number, idUser: number, idPost: number) {
     this.idLike = idLike;
     this.idUser = idUser;

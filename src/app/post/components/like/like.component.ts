@@ -14,19 +14,22 @@ export class LikeComponent implements OnInit {
  @Input() post!: Post
  isLiked!: boolean
  idUser!: number
+ like!: Like
+ countLike!: number
 
   constructor(private _likeService: LikePostService, private _jwtTokenService: JwtTokenService) {
    this.idUser = Number(_jwtTokenService.getIdUser())
   }
 
   ngOnInit(): void {
-    this.getLikes(this.post.likes)
+    this.getLikes(this.post.likes);
   }
 
   getLikes(likes: Like[]){
     this._likeService.getLikes(likes)
-
     this.isLiked = this._likeService.isLiked
+    this.countLike =  this._likeService.getCountLikes(this.post)
+    console.log(this.countLike)
   }
 
   setIsLike() {
@@ -35,7 +38,7 @@ export class LikeComponent implements OnInit {
      if(this.isLiked){
        this.addLike()
      } else {
-       // this.removeLike()
+       this.removeLike()
      }
    } else{
       alert("il faut être connecté pour pouvoir aimer une publication ")
@@ -47,7 +50,9 @@ export class LikeComponent implements OnInit {
     this._likeService.addLike(createLikeDto).subscribe()
   }
 
-  /*removeLike(){
-    this._likeService.removeLike(idLike)
-  }*/
+  removeLike(){
+    this._likeService.getIdByIdPostAndIdUser(this.idUser, this.post.idPost).subscribe( like => {
+      this._likeService.removeLike(like.idLike).subscribe()
+    });
+  }
 }

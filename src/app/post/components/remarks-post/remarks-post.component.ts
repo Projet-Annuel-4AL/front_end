@@ -5,6 +5,10 @@ import {Post} from "../../domain/post.entity";
 import {Remark} from "./domain/remark.entity";
 import {RemarksPostService} from "./service/remarks.post.service";
 import {HttpClient} from "@angular/common/http";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {JwtTokenService} from "../../../Authentication/services/jwt-token.service";
+import {CreateRemark} from "./domain/create-remark.dto";
+import {UserService} from "../../../user/service/user.service";
 
 @Component({
   selector: 'app-remarks-post',
@@ -19,11 +23,20 @@ export class RemarksPostComponent implements OnInit {
   code!: string;
   output!: string;
   editorOptions!: any;
+  commentForm =  new FormGroup({
+    content: new FormControl(null, [
+      Validators.required
+    ])
+  });
+
+
 
   constructor(
     private _postService: PostService,
+    private _userService: UserService,
     private _activatedRoute: ActivatedRoute,
     private _remarksService: RemarksPostService,
+    private _jwtTokenService: JwtTokenService,
     private http: HttpClient
   ) {}
 
@@ -37,9 +50,21 @@ export class RemarksPostComponent implements OnInit {
     this._postService.getPostById(idPost).subscribe(post => {
       this.post = post;
       this.remarks = this.post.remarks;
+
+      this.remarks.forEach((value)=>{
+        console.log(value.idUser);
+        this._userService.getUserByID(value.idUser).subscribe(user=>{
+          value.name= user.firstName;
+        });
+      })
       if (post.code !== null){
         this.code = post.code.content;
       }
+      this._userService.getUserByID(2).subscribe(user =>{
+        let test = user.lastName;
+        console.log(test);
+      });
+
     });
   }
 
@@ -61,4 +86,15 @@ export class RemarksPostComponent implements OnInit {
       .catch( err => {
       });
   }
+
+  submitCommentForm() {
+    const remark = new CreateRemark(this.post.idPost, Number(this._jwtTokenService.getIdUser()), this.commentForm.value.content);
+    console.log(remark);
+    return this.http.post("http://localhost:3000/api/remarks", remark).subscribe((result: any) => {
+        console.log(result)
+      this.commentForm.reset();
+      this.ngOnInit();
+    });
+  }
+
 }

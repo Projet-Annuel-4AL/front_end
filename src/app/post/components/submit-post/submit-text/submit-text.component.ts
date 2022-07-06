@@ -74,13 +74,15 @@ export class SubmitTextComponent{
   })
 
   submitPostForm() {
+    console.log("on est dans le submitPostForm");
     const createdText: CreateText = new CreateText(this.postForm.value.description);
     this.postService.addText(createdText, this.postForm.value.title).subscribe();
-    //this._router.navigate(['']);
-    this._router.navigateByUrl('')
+    this._router.navigateByUrl('');
+    /*this._router.navigate([''])
       .then(() => {
         window.location.reload();
-      });
+      });*/
+
 
   }
 

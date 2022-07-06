@@ -13,8 +13,6 @@ export class CreatePostComponent{
   }
 
   ngOnInit(): void {
-
-
     this.isConnected = this._jwtTokenService.getIdUser() != null;
   }
 

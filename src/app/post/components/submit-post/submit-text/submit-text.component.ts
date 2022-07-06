@@ -3,6 +3,7 @@ import {AngularEditorConfig} from "@kolkov/angular-editor";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CreateText} from "../../../post-body/create-text.dto";
 import {PostService} from "../../../service/post.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-submit-text',
@@ -12,7 +13,8 @@ import {PostService} from "../../../service/post.service";
 export class SubmitTextComponent{
 
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService,
+              private _router: Router) {
   }
 
   editorConfig: AngularEditorConfig = {
@@ -73,7 +75,13 @@ export class SubmitTextComponent{
 
   submitPostForm() {
     const createdText: CreateText = new CreateText(this.postForm.value.description);
-    this.postService.addText(createdText, this.postForm.value.title).subscribe()
+    this.postService.addText(createdText, this.postForm.value.title).subscribe();
+    //this._router.navigate(['']);
+    this._router.navigateByUrl('')
+      .then(() => {
+        window.location.reload();
+      });
+
   }
 
 }

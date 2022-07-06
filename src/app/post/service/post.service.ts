@@ -9,12 +9,13 @@ import {CreateVideo} from "../post-body/create-video.dto";
 import {Text} from "../post-body/domain/text.entity";
 import {CreatePost} from "../domain/create-post.dto";
 import {Code} from "../post-body/domain/code.entity";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class PostService {
   private _url: string = "http://localhost:3000/api/posts/";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _router: Router) {
   }
 
   getPosts() {
@@ -73,6 +74,10 @@ export class PostService {
     return new Observable<Post>((observer) => {
       this.http.post(this._url, postToAdd).subscribe((result: any) => {
         console.log("le result:", result);
+        this._router.navigateByUrl("")
+          .then(() => {
+            window.location.reload();
+          });
         observer.next(result);
         observer.complete();
       }, error => {

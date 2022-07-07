@@ -70,10 +70,8 @@ export class PostService {
   }
 
   addPost(postToAdd: CreatePost) {
-    console.log("on est dans le addPost:", postToAdd);
     return new Observable<Post>((observer) => {
       this.http.post(this._url, postToAdd).subscribe((result: any) => {
-        console.log("le result:", result);
         this._router.navigateByUrl("")
           .then(() => {
             window.location.reload();
@@ -102,7 +100,6 @@ export class PostService {
     return new Observable<Text>((observer) => {
       this.http.post("http://localhost:3000/api/texts", textToAdd).subscribe( (text: any) =>  {
           const createPost: CreatePost = new CreatePost(title, null, null, text.id, null, 2);
-          console.log("on est dans addText et le post est :", createPost);
           this.addPost(createPost).subscribe();
           observer.complete();
       })

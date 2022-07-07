@@ -30,18 +30,19 @@
       {{remark.content}}
     </div>
   </ul>
-
-  <form [formGroup]="commentForm">
-    <div class="card border-light w-50">
-      <div class="card-body">
-        <input type="text" class="form-control" id="content" formControlName="content" aria-describedby="emailHelp"
-               placeholder="Ecrire Un Commentaire">
-        <button type="submit" mat-raised-button color="primary" [disabled]="!commentForm.valid"
-                (click)="submitCommentForm()">
-          Publier
-        </button>
+  <ng-template [ngIf]="isConnected == true">
+    <form [formGroup]="commentForm">
+      <div class="card border-light w-50">
+        <div class="card-body">
+          <input type="text" class="form-control" id="content" formControlName="content" aria-describedby="emailHelp"
+                 placeholder="Ecrire Un Commentaire">
+          <button type="submit" mat-raised-button color="primary" [disabled]="!commentForm.valid"
+                  (click)="submitCommentForm()">
+            Publier
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </ng-template>
 </mat-card>
 </div>

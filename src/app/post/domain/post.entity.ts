@@ -15,8 +15,11 @@ export class Post {
   readonly user: User;
   readonly remarks: Remark[];
   readonly likes: Like[];
+  numberOfRemarks: number;
 
-  constructor(idPost: number,title: string, createdDate: Date, idVideo: number, idPicture: number, text: Text, code: Code, user: User, remarks: Remark[], likes: Like[]) {
+  constructor(idPost: number,title: string, createdDate: Date, idVideo: number,
+              idPicture: number, text: Text, code: Code, user: User, remarks: Remark[],
+              likes: Like[]) {
     this.idPost = idPost;
     this.title = title;
     this.createdDate = createdDate;
@@ -25,7 +28,8 @@ export class Post {
     this.text = text;
     this.code = code;
     this.user = user;
-    this.remarks = remarks
-    this.likes = likes
+    this.remarks = remarks;
+    this.likes = likes;
+    this.numberOfRemarks = 0;
   }
 }

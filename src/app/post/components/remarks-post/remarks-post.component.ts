@@ -28,6 +28,7 @@ export class RemarksPostComponent implements OnInit {
       Validators.required
     ])
   });
+  isConnected: boolean | undefined;
 
 
 
@@ -44,15 +45,16 @@ export class RemarksPostComponent implements OnInit {
     const routeParams = this._activatedRoute.snapshot.paramMap;
     const idPost = Number(routeParams.get('idPost'));
     this.language = 'java';
-    this.theme = 'vs-dark'
+    this.theme = 'vs-dark';
+    this.isConnected = false;
     this.editorOptions = {readOnly: true, theme: this.theme, language: this.language, automaticLayout: true};
+    if (this._jwtTokenService.getIdUser() != null){this.isConnected = true;}
 
     this._postService.getPostById(idPost).subscribe(post => {
       this.post = post;
       this.remarks = this.post.remarks;
 
       this.remarks.forEach((value)=>{
-        console.log(value.idUser);
         this._userService.getUserByID(value.idUser).subscribe(user=>{
           value.name= user.firstName;
         });
@@ -60,11 +62,6 @@ export class RemarksPostComponent implements OnInit {
       if (post.code !== null){
         this.code = post.code.content;
       }
-      this._userService.getUserByID(2).subscribe(user =>{
-        let test = user.lastName;
-        console.log(test);
-      });
-
     });
   }
 
@@ -89,7 +86,6 @@ export class RemarksPostComponent implements OnInit {
 
   submitCommentForm() {
     const remark = new CreateRemark(this.post.idPost, Number(this._jwtTokenService.getIdUser()), this.commentForm.value.content);
-    console.log(remark);
     return this.http.post("http://localhost:3000/api/remarks", remark).subscribe((result: any) => {
         console.log(result)
       this.commentForm.reset();

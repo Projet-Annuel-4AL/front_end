@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.idUserFollowed = Number(this.route.snapshot.paramMap.get('idUser'));
-    console.log("id userfollowed:" + this.idUserFollowed)
     this.getUserById()
     this.getPostsByIdUser()
     this.editorOptions = {readOnly: true, theme: 'vs-dark', language: 'java', automaticLayout: true};
@@ -42,16 +41,12 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  getFollowByUserId(){
-   // this._followService.getFollowsByUserId(this._jwtTokenService.getIdUser()).subscribe()
-  }
-
   setIsFollowed(){
     this.isFollowed = !this.isFollowed;
     if(this.isFollowed){
       this.addFollow()
     } else {
-      //this.removeFollow()
+      this.removeFollow()
     }
   }
 
@@ -60,13 +55,13 @@ export class ProfileComponent implements OnInit {
     this._followService.addFollow(createFollowDto).subscribe()
   }
 
-  /*
+
   removeFollow(){
-    this._followService.getIdByIdPostAndIdUser(this.idUser, this.post.idPost).subscribe( follow => {
-      this._followService.removeFollow(follow.idLike).subscribe()
+    this._followService.getIdFollowByUserFollowingAndUserFollowed(this.idUser, this.idUserFollowed).subscribe(follow => {
+      this._followService.removeFollow(follow.idFollow).subscribe()
     });
   }
-*/
+
   getPostsByIdUser(){
     this._postService.getPostsByUserId().subscribe(posts => {
       this.posts = posts

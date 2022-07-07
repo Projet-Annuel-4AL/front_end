@@ -32,7 +32,8 @@ import {LikePostService} from "./components/like/service/like.post.service";
   ],
   exports: [
     PostComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    LikeComponent
   ],
   providers:[PostService, RemarksPostService, UserService, LikePostService],
     imports: [

@@ -29,7 +29,6 @@ export class LikeComponent implements OnInit {
     this._likeService.getLikes(likes)
     this.isLiked = this._likeService.isLiked
     this.countLike =  this._likeService.getCountLikes(this.post)
-    console.log(this.countLike)
   }
 
   setIsLike() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {JwtTokenService} from "../../Authentication/services/jwt-token.service";
 
 @Component({
   selector: 'app-dashboard-connected',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-connected.component.scss']
 })
 export class DashboardConnectedComponent implements OnInit {
+  idUser! : number
 
-  constructor() { }
+  constructor(private _jwtTokenService: JwtTokenService) {
+    this.idUser = Number(_jwtTokenService.getIdUser())
+  }
 
   ngOnInit(): void {
   }

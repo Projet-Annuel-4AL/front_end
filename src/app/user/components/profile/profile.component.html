@@ -1,0 +1,62 @@
+<mat-card>
+  <div class="card-body pt-0 pt-md-4">
+    <div class="text-center">
+    <img class="avatar" src="https://yzgeneration.com/wp-content/uploads/2019/05/One-Punch-Man-Tome-15-Cover.jpg" style="max-height: 100px">
+      <h3>
+         {{ user.firstName}} {{user.lastName}}
+      </h3>
+      <br>
+      <div class="center">
+        <button type="submit" mat-raised-button color="white" (click)="setIsFollowed()" [ngClass]="{'follow' : isFollowed, 'notFollow': !isFollowed}" >
+          <ng-template [ngIf]="isFollowed" [ngIfElse]="notFollowed">Suivi</ng-template>
+          <ng-template #notFollowed >Suivre</ng-template>
+        </button>
+      </div>
+      <hr class="my-4" />
+    </div>
+  </div>
+</mat-card>
+<div *ngIf="posts && posts.length > 0">
+  <ul *ngFor=" let post of posts">
+    <li>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-subtitle> {{ post.user.firstName }} </mat-card-subtitle>
+          <mat-card-subtitle>{{post.createdDate}} </mat-card-subtitle>
+          <mat-card-title>
+            <h5> {{post.title}}</h5>
+          </mat-card-title>
+        </mat-card-header>
+
+        <div *ngIf="post.code !== null">
+          <div style="width: 600px; height: 200px">
+            <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="post.code.content"></ngx-monaco-editor>
+          </div>
+        </div>
+        <mat-card-content *ngIf="post.text !== null">
+          <p> {{post.text.content}}</p>
+        </mat-card-content>
+        <mat-card-footer style="padding-bottom: 10px">
+          <ul class="d-flex justify-content-sm-around">
+            <li>
+              <app-like [post]="post"></app-like>
+            </li>
+            <li>
+              <a mat-button [routerLink]="['/remark-post/', post.idPost]">
+                <mat-icon>mode_comment </mat-icon>
+                Commentaires
+              </a>
+            </li>
+            <li>
+              <button mat-button>
+                <mat-icon>share</mat-icon>
+                Partager
+              </button>
+            </li>
+          </ul>
+        </mat-card-footer>
+      </mat-card>
+    </li>
+  </ul>
+</div>
+

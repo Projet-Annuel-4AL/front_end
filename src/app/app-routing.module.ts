@@ -4,6 +4,7 @@ import { PageNotFoundComponent } from './errors-page/components/page-not-found/p
 
 const routes: Routes = [
   { path: '', loadChildren:() => import("./post/post.module").then(m => m.PostModule) },
+  { path: 'user', loadChildren:() => import("./user/user.module").then(m => m.UserModule) },
   { path: 'auth', loadChildren:() => import("./Authentication/authentication.module").then(m => m.AuthenticationModule) },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];

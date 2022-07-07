@@ -9,17 +9,48 @@ import {CreateVideo} from "../post-body/create-video.dto";
 import {Text} from "../post-body/domain/text.entity";
 import {CreatePost} from "../domain/create-post.dto";
 import {Code} from "../post-body/domain/code.entity";
+import {Router} from "@angular/router";
+import {JwtTokenService} from "../../Authentication/services/jwt-token.service";
 
 @Injectable()
 export class PostService {
   private _url: string = "http://localhost:3000/api/posts/";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _router: Router, private _jwtTokenService: JwtTokenService) {
   }
 
   getPosts() {
     return new Observable<Post[]>((observer) => {
       this.http.get(this._url).subscribe((results: any) => {
+        const posts = [];
+        for (const result of results) {
+          const post = new Post(
+            result.id,
+            result.title,
+            result.createdDate,
+            result.idVideo,
+            result.idPicture,
+            result.text,
+            result.code,
+            result.user,
+            result.remarks,
+            result.likes);
+          post.numberOfRemarks = result.remarks.length;
+          posts.push(post);
+        }
+        observer.next(posts);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      })
+    });
+  }
+
+  getPostsByUserId() {
+    let idUser = this._jwtTokenService.getIdUser()
+    return new Observable<Post[]>((observer) => {
+      this.http.get(this._url + "id/" + idUser).subscribe((results: any) => {
         const posts = [];
         for (const result of results) {
           const post = new Post(
@@ -70,6 +101,10 @@ export class PostService {
   addPost(postToAdd: CreatePost) {
     return new Observable<Post>((observer) => {
       this.http.post(this._url, postToAdd).subscribe((result: any) => {
+        this._router.navigateByUrl("")
+          .then(() => {
+            window.location.reload();
+          });
         observer.next(result);
         observer.complete();
       }, error => {

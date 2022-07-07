@@ -22,7 +22,6 @@ export class LoginComponent{
     ])
   });
 
-
   constructor(private http: HttpClient, private localStorage: LocalStorageService, private router: Router) {
   }
 

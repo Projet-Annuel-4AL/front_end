@@ -6,6 +6,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import {MatIconModule} from "@angular/material/icon";
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatFormFieldModule
   ]
 })
 export class SharedModule { }

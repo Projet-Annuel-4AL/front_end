@@ -4,6 +4,7 @@ import {Injectable} from "@angular/core";
 import {CreateFollowDto} from "../domain/create-follow.dto";
 import {Follow} from "../domain/follow";
 import {Post} from "../../../../post/domain/post.entity";
+import {Like} from "../../../../post/components/like/domain/like.entity";
 @Injectable()
 export class FollowService {
   private _url: string = "http://localhost:3000/api/follows/";
@@ -11,7 +12,7 @@ export class FollowService {
   constructor(private http: HttpClient) {
   }
 
-  getFollowsByUserId(idUser: number){
+  getFollowsByUserId(idUser: string | null){
     return new Observable<Follow[]>((observer) => {
       this.http.get(this._url + idUser).subscribe((results: any) => {
         const follows = [];
@@ -23,6 +24,22 @@ export class FollowService {
           follows.push(follow);
         }
         observer.next(follows);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      })
+    });
+  }
+
+  getIdFollowByUserFollowingAndUserFollowed(idUserFollowing: number, idUserFollowed: number){
+    return new Observable<Follow>((observer) => {
+      this.http.get(this._url + "?idUserFollowing=" + idUserFollowing + "&idUserFollowed=" + idUserFollowed).subscribe((result: any) => {
+        const follow = new Follow(
+          result.id,
+          result.idUserFollowing,
+          result.idUserFollowed);
+        observer.next(follow);
         observer.complete();
       }, error => {
         observer.error(error);
@@ -47,7 +64,7 @@ export class FollowService {
 
   removeFollow(idFollow: number) {
     return new Observable<Follow>((observer) => {
-      this.http.delete(this._url + "/" + idFollow).subscribe((result: any) => {
+      this.http.delete(this._url + idFollow).subscribe((result: any) => {
         observer.next(result);
         observer.complete();
       }, error => {

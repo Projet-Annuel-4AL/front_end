@@ -5,7 +5,7 @@
       <li>
         <mat-card>
           <mat-card-header>
-            <mat-card-subtitle> {{ post.user.firstName }} </mat-card-subtitle>
+            <mat-card-subtitle> <a [routerLink]="['user/profile', post.user.id]"> {{ post.user.firstName }} </a> </mat-card-subtitle>
             <mat-card-subtitle>{{post.createdDate}} </mat-card-subtitle>
             <mat-card-title>
               <h5> {{post.title}}</h5>

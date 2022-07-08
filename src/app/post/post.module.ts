@@ -51,14 +51,6 @@ import {MatDialogModule} from "@angular/material/dialog";
     AngularEditorModule,
     MatDialogModule
   ]
-    imports: [
-        SharedModule,
-        PostRoutingModule,
-        NgxDropzoneModule,
-        MonacoEditorModule.forRoot(),
-        AngularEditorModule,
-        MatDialogModule
-    ]
 
 })
 export class PostModule { }

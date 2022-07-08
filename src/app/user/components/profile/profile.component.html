@@ -1,4 +1,5 @@
 <mat-card>
+  <div class="container d-flex align-items-center justify-content-center">
   <div class="card-body pt-0 pt-md-4">
     <div class="text-center">
     <img class="avatar" src="https://yzgeneration.com/wp-content/uploads/2019/05/One-Punch-Man-Tome-15-Cover.jpg" style="max-height: 100px">
@@ -14,10 +15,41 @@
           </button>
         </ng-template>
       </div>
-      <hr class="my-4" />
     </div>
   </div>
+  <div>
+    <mat-card>
+      <mat-card-header class="center">
+        <mat-card-title>
+          <h5>Mes relations : </h5>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-tab-group class="center" dynamicHeight>
+        <mat-tab label="abonné">
+          <ul>
+            <li>al</li>
+            <li>al</li>
+            <li>al</li>
+            <li>al</li>
+            <li>al</li>
+            <li>al</li>
+          </ul>
+        </mat-tab>
+        <mat-tab label="abonnement">
+          <ul>
+            <li>Lucas</li>
+            <li>Pierre</li>
+            <li>Lucie</li>
+            <li>Clara</li>
+          </ul>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+  </div>
 </mat-card>
+<br>
+<div class="container">
 <div *ngIf="posts && posts.length > 0">
   <ul *ngFor=" let post of posts">
     <li>
@@ -29,7 +61,6 @@
             <h5> {{post.title}}</h5>
           </mat-card-title>
         </mat-card-header>
-
         <div *ngIf="post.code !== null">
           <div style="width: 600px; height: 200px">
             <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="post.code.content"></ngx-monaco-editor>
@@ -38,7 +69,8 @@
         <mat-card-content *ngIf="post.text !== null">
           <p> {{post.text.content}}</p>
         </mat-card-content>
-        <mat-card-footer style="padding-bottom: 10px">
+        <hr>
+        <mat-card-footer style="padding-bottom: 5px">
           <ul class="d-flex justify-content-sm-around">
             <li>
               <app-like [post]="post"></app-like>
@@ -61,4 +93,4 @@
     </li>
   </ul>
 </div>
-
+</div>

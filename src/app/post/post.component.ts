@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Post} from "./domain/post.entity";
 import {PostService} from "./service/post.service";
 import {LikePostService} from "./components/like/service/like.post.service";
+import {DeletePostComponent} from "./components/delete-post/delete-post.component";
+import {MatDialog} from "@angular/material/dialog";
+import {JwtTokenService} from "../Authentication/services/jwt-token.service";
 
 @Component({
   selector: 'app-post',
@@ -11,8 +14,11 @@ import {LikePostService} from "./components/like/service/like.post.service";
 export class PostComponent implements OnInit {
   posts!: Post[];
   editorOptions!: any;
+  currentUser! : number
 
-  constructor(private _postService: PostService, private _likeService: LikePostService) {}
+  constructor(private _postService: PostService, private _likeService: LikePostService, public dialog: MatDialog, private _jwtTokenService: JwtTokenService) {
+    this.currentUser =  Number(this._jwtTokenService.getIdUser())
+  }
 
   ngOnInit() {
     this._postService.getPosts().subscribe(posts => {
@@ -21,5 +27,12 @@ export class PostComponent implements OnInit {
         if (this.posts.length > 0) {}
       }
     );
+  }
+
+  openDialog(idPostToDelete: number): void {
+    let dialogRef = this.dialog.open(DeletePostComponent, {
+      width: '400px',
+      data: { idPost:  idPostToDelete}
+    });
   }
 }

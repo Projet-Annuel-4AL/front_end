@@ -118,7 +118,7 @@ export class PostService {
   addCode(codeToAdd: CreateCode, title: string) {
     return new Observable<Code>((observer) => {
       this.http.post("http://localhost:3000/api/codes", codeToAdd).subscribe( (code: any) =>  {
-        const createPost: CreatePost = new CreatePost(title, null, null, null, code.id, 2);
+        const createPost: CreatePost = new CreatePost(title, null, null, null, code.id, Number(this._jwtTokenService.getIdUser()));
         this.addPost(createPost).subscribe();
         observer.complete();
       })
@@ -128,7 +128,7 @@ export class PostService {
   addText(textToAdd: CreateText, title: string) {
     return new Observable<Text>((observer) => {
       this.http.post("http://localhost:3000/api/texts", textToAdd).subscribe( (text: any) =>  {
-          const createPost: CreatePost = new CreatePost(title, null, null, text.id, null, 2);
+          const createPost: CreatePost = new CreatePost(title, null, null, text.id, null, Number(this._jwtTokenService.getIdUser()));
           this.addPost(createPost).subscribe();
           observer.complete();
       })

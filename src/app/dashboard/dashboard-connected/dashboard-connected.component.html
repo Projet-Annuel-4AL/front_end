@@ -4,7 +4,7 @@
 
   <a mat-button [routerLink]="['user/profile', idUser]"> Profil </a>
 
-  <a mat-button routerLink="auth/register">Deconnexion </a>
+  <a mat-button (click)="deconnection()">Deconnexion </a>
 
   <form class="d-flex">
     <input class="form-control me-sm-2" type="text" placeholder="Recherche...">

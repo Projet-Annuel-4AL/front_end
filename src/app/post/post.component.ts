@@ -6,6 +6,7 @@ import {DeletePostComponent} from "./components/delete-post/delete-post.componen
 import {MatDialog} from "@angular/material/dialog";
 import {JwtTokenService} from "../Authentication/services/jwt-token.service";
 
+
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -20,6 +21,7 @@ export class PostComponent implements OnInit {
     this.currentUser =  Number(this._jwtTokenService.getIdUser())
   }
 
+
   ngOnInit() {
     this._postService.getPosts().subscribe(posts => {
         this.posts = posts;
@@ -27,6 +29,7 @@ export class PostComponent implements OnInit {
         if (this.posts.length > 0) {}
       }
     );
+
   }
 
   openDialog(idPostToDelete: number): void {
@@ -35,4 +38,5 @@ export class PostComponent implements OnInit {
       data: { idPost:  idPostToDelete}
     });
   }
+
 }

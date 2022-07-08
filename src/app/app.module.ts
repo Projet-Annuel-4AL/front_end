@@ -16,6 +16,7 @@ import {DashboardConnectedComponent} from "./dashboard/dashboard-connected/dashb
 import {DashboardNotConnectedComponent} from "./dashboard/dashboard-not-connected/dashboard-not-connected.component";
 import {MatDialogModule} from '@angular/material/dialog';
 import {DialogTemplateComponent} from "./dialog/components/dialog-template/dialog-template.component";
+import { DialogNotConnectedComponent } from './dialog-not-connected/dialog-not-connected.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {DialogTemplateComponent} from "./dialog/components/dialog-template/dialo
     PageNotFoundComponent,
     DashboardConnectedComponent,
     DashboardNotConnectedComponent,
-    DialogTemplateComponent
+    DialogTemplateComponent,
+    DialogNotConnectedComponent
   ],
   imports: [
     BrowserModule,

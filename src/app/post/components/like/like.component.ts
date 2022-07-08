@@ -4,6 +4,8 @@ import {Post} from "../../domain/post.entity";
 import {Like} from "./domain/like.entity";
 import {CreateLikeDto} from "./domain/create-like.dto";
 import {JwtTokenService} from "../../../Authentication/services/jwt-token.service";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogNotConnectedComponent} from "../../../dialog-not-connected/dialog-not-connected.component";
 
 @Component({
   selector: 'app-like',
@@ -17,7 +19,7 @@ export class LikeComponent implements OnInit {
  like!: Like
  countLike!: number
 
-  constructor(private _likeService: LikePostService, private _jwtTokenService: JwtTokenService) {
+  constructor(private _likeService: LikePostService, private _jwtTokenService: JwtTokenService, public dialog: MatDialog) {
    this.idUser = Number(_jwtTokenService.getIdUser())
   }
 
@@ -40,7 +42,9 @@ export class LikeComponent implements OnInit {
        this.removeLike()
      }
    } else{
-      alert("il faut être connecté pour pouvoir aimer une publication ")
+       let dialogRef = this.dialog.open(DialogNotConnectedComponent, {
+         width: '400px'
+       });
     }
   }
 

@@ -17,26 +17,29 @@ import {LikePostService} from "../../../post/components/like/service/like.post.s
 })
 export class ProfileComponent implements OnInit {
   user! : User
-  idUser! : number
-  idUserFollowed!: number
-  isFollowed!: boolean
+  idUserToGet! : number
+  currentUser!: number
+  isFollowed: boolean = false
   posts!: Post[]
   editorOptions!: any
+  idFollow! : number
 
   constructor(private _jwtTokenService: JwtTokenService, private _userService: UserService,
-              private _postService: PostService, private _followService: FollowService, private route: ActivatedRoute) {
-    this.idUser = Number(this._jwtTokenService.getIdUser())
+              private _postService: PostService, private _followService: FollowService, private route: ActivatedRoute)
+  {
+    this.idUserToGet = Number(this.route.snapshot.paramMap.get('idUser'))
+    this.currentUser =  Number(this._jwtTokenService.getIdUser())
   }
 
   ngOnInit(): void {
-    this.idUserFollowed = Number(this.route.snapshot.paramMap.get('idUser'));
+    this.checkIfUserOnPageIsFollowedByCurrentUser()
     this.getUserById()
-    this.getPostsByIdUser()
+    this.getPostsByIdUser(this.idUserToGet)
     this.editorOptions = {readOnly: true, theme: 'vs-dark', language: 'java', automaticLayout: true};
   }
 
   getUserById(){
-    this._userService.getUserByID(this.idUser).subscribe( user => {
+    this._userService.getUserByID(this.idUserToGet).subscribe( user => {
       this.user = user
     })
   }
@@ -50,20 +53,27 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  checkIfUserOnPageIsFollowedByCurrentUser(){
+    this._followService.getIdFollowByUserFollowingAndUserFollowed(this.currentUser, this.idUserToGet).subscribe(follow => {
+      if(follow.idUserFollowing == this.currentUser){
+        this.isFollowed = true
+        this.idFollow = follow.idFollow
+      }
+    })
+  }
+
   addFollow(){
-    let createFollowDto = new CreateFollowDto(this.idUser, this.idUserFollowed)
+    let createFollowDto = new CreateFollowDto(this.currentUser, this.idUserToGet)
     this._followService.addFollow(createFollowDto).subscribe()
   }
 
 
   removeFollow(){
-    this._followService.getIdFollowByUserFollowingAndUserFollowed(this.idUser, this.idUserFollowed).subscribe(follow => {
-      this._followService.removeFollow(follow.idFollow).subscribe()
-    });
+      this._followService.removeFollow(this.idFollow).subscribe()
   }
 
-  getPostsByIdUser(){
-    this._postService.getPostsByUserId().subscribe(posts => {
+  getPostsByIdUser(idUserToGet: number){
+    this._postService.getPostsByUserId(idUserToGet).subscribe(posts => {
       this.posts = posts
     })
   }

@@ -7,7 +7,7 @@
       </h3>
       <br>
       <div class="center">
-        <ng-template [ngIf]="idUser != idUserFollowed">
+        <ng-template [ngIf]="currentUser != idUserToGet">
           <button type="submit" mat-raised-button color="white" (click)="setIsFollowed()" [ngClass]="{'follow' : isFollowed, 'notFollow': !isFollowed}" >
             <ng-template [ngIf]="isFollowed" [ngIfElse]="notFollowed">Suivi</ng-template>
             <ng-template #notFollowed >Suivre</ng-template>

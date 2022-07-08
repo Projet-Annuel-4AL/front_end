@@ -47,8 +47,8 @@ export class PostService {
     });
   }
 
-  getPostsByUserId() {
-    let idUser = this._jwtTokenService.getIdUser()
+  getPostsByUserId(idUserToGet: number) {
+    let idUser = idUserToGet
     return new Observable<Post[]>((observer) => {
       this.http.get(this._url + "id/" + idUser).subscribe((results: any) => {
         const posts = [];

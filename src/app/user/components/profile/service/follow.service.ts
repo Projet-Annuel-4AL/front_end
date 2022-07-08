@@ -64,7 +64,7 @@ export class FollowService {
 
   removeFollow(idFollow: number) {
     return new Observable<Follow>((observer) => {
-      this.http.delete(this._url + "/" + idFollow).subscribe((result: any) => {
+      this.http.delete(this._url + idFollow).subscribe((result: any) => {
         observer.next(result);
         observer.complete();
       }, error => {

@@ -14,6 +14,8 @@ import {LocalStorageService} from "./Authentication/services/local-storage.servi
 import {AuthenticationModule} from "./Authentication/authentication.module";
 import {DashboardConnectedComponent} from "./dashboard/dashboard-connected/dashboard-connected.component";
 import {DashboardNotConnectedComponent} from "./dashboard/dashboard-not-connected/dashboard-not-connected.component";
+import {MatDialogModule} from '@angular/material/dialog';
+import {DialogTemplateComponent} from "./dialog/components/dialog-template/dialog-template.component";
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import {DashboardNotConnectedComponent} from "./dashboard/dashboard-not-connecte
     AppComponent,
     PageNotFoundComponent,
     DashboardConnectedComponent,
-    DashboardNotConnectedComponent
+    DashboardNotConnectedComponent,
+    DialogTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import {DashboardNotConnectedComponent} from "./dashboard/dashboard-not-connecte
     SharedModule,
     CoreModule,
     PostModule,
-    AuthenticationModule
+    AuthenticationModule,
+    MatDialogModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, JwtTokenService,LocalStorageService],
   exports: [],

@@ -16,6 +16,8 @@ import {RemarksPostService} from "./components/remarks-post/service/remarks.post
 import {UserService} from "../user/service/user.service";
 import {LikeComponent} from "./components/like/like.component";
 import {LikePostService} from "./components/like/service/like.post.service";
+import { SharePostComponent } from './components/share-post/share-post.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -28,7 +30,8 @@ import {LikePostService} from "./components/like/service/like.post.service";
     SubmitImageVideoComponent,
     CodeRunnerComponent,
     RemarksPostComponent,
-    LikeComponent
+    LikeComponent,
+    SharePostComponent
   ],
   exports: [
     PostComponent,
@@ -36,12 +39,13 @@ import {LikePostService} from "./components/like/service/like.post.service";
     LikeComponent
   ],
   providers:[PostService, RemarksPostService, UserService, LikePostService],
-    imports: [
-        SharedModule,
-        PostRoutingModule,
-        NgxDropzoneModule,
-        MonacoEditorModule.forRoot(),
-        AngularEditorModule
-    ]
+  imports: [
+    SharedModule,
+    PostRoutingModule,
+    NgxDropzoneModule,
+    MonacoEditorModule.forRoot(),
+    AngularEditorModule,
+    MatDialogModule
+  ]
 })
 export class PostModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Post} from "./domain/post.entity";
 import {PostService} from "./service/post.service";
 import {LikePostService} from "./components/like/service/like.post.service";
+import {MatDialog,MatDialogModule,MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-post',
@@ -12,7 +13,7 @@ export class PostComponent implements OnInit {
   posts!: Post[];
   editorOptions!: any;
 
-  constructor(private _postService: PostService, private _likeService: LikePostService) {}
+  constructor(private _postService: PostService, private _likeService: LikePostService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this._postService.getPosts().subscribe(posts => {
@@ -21,5 +22,8 @@ export class PostComponent implements OnInit {
         if (this.posts.length > 0) {}
       }
     );
+
   }
+
+
 }

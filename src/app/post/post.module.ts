@@ -16,6 +16,8 @@ import {RemarksPostService} from "./components/remarks-post/service/remarks.post
 import {UserService} from "../user/service/user.service";
 import {LikeComponent} from "./components/like/like.component";
 import {LikePostService} from "./components/like/service/like.post.service";
+import { DeletePostComponent } from './components/delete-post/delete-post.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -28,12 +30,14 @@ import {LikePostService} from "./components/like/service/like.post.service";
     SubmitImageVideoComponent,
     CodeRunnerComponent,
     RemarksPostComponent,
-    LikeComponent
+    LikeComponent,
+    DeletePostComponent
   ],
   exports: [
     PostComponent,
     CreatePostComponent,
-    LikeComponent
+    LikeComponent,
+
   ],
   providers:[PostService, RemarksPostService, UserService, LikePostService],
     imports: [
@@ -41,7 +45,8 @@ import {LikePostService} from "./components/like/service/like.post.service";
         PostRoutingModule,
         NgxDropzoneModule,
         MonacoEditorModule.forRoot(),
-        AngularEditorModule
+        AngularEditorModule,
+        MatDialogModule
     ]
 })
 export class PostModule { }

@@ -24,7 +24,7 @@ import {MatChipsModule} from "@angular/material/chips";
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatChipsModule
+    MatChipsModule,
   ]
 })
 export class SharedModule { }

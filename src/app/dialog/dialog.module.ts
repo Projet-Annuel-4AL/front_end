@@ -7,7 +7,6 @@ import {MatDialog,MatDialogModule,MatDialogRef } from "@angular/material/dialog"
 
 @NgModule({
   declarations: [
-    DialogTemplateComponent
   ],
   imports: [
     SharedModule

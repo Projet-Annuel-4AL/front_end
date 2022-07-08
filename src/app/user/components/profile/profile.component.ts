@@ -9,6 +9,7 @@ import {FollowService} from "./service/follow.service";
 import {CreateFollowDto} from "./domain/create-follow.dto";
 import {ActivatedRoute} from "@angular/router";
 import {LikePostService} from "../../../post/components/like/service/like.post.service";
+import {Follow} from "./domain/follow";
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +24,8 @@ export class ProfileComponent implements OnInit {
   posts!: Post[]
   editorOptions!: any
   idFollow! : number
+  followingUsers! : Follow[]
+  followedUsers! : Follow[]
 
   constructor(private _jwtTokenService: JwtTokenService, private _userService: UserService,
               private _postService: PostService, private _followService: FollowService, private route: ActivatedRoute)
@@ -67,7 +70,19 @@ export class ProfileComponent implements OnInit {
     this._followService.addFollow(createFollowDto).subscribe()
   }
 
+/*
+  getUsersFollowedByCurrentUser(){
+    this._followService.getUsersFollowedByUserId(this.currentUser).subscribe( follows => {
+      this.followedUsers = follows
+    })
+  }
 
+  getUsersFollowingCurrentUser(){
+    this._followService.getUserFollowingByUserId(this.currentUser).subscribe( follows => {
+      this.followingUsers = follows
+    })
+  }
+*/
   removeFollow(){
       this._followService.removeFollow(this.idFollow).subscribe()
   }

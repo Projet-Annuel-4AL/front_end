@@ -11,27 +11,49 @@ export class FollowService {
 
   constructor(private http: HttpClient) {
   }
+  /*
+    getUsersFollowedByUserId(idUser: number){
+      return new Observable<Follow[]>((observer) => {
+        this.http.get(this._url + "following/" + idUser).subscribe((results: any) => {
+          const follows = [];
+          for (const result of results) {
+            const follow = new Follow(
+              result.idFollow,
+              result.idUserFollowing,
+              result.idUserFollowed
+              result.follo);
+            follows.push(follow);
+          }
+          observer.next(follows);
+          observer.complete();
+        }, error => {
+          observer.error(error);
+          observer.complete();
+        })
+      });
+    }
 
-  getFollowsByUserId(idUser: string | null){
-    return new Observable<Follow[]>((observer) => {
-      this.http.get(this._url + idUser).subscribe((results: any) => {
-        const follows = [];
-        for (const result of results) {
-          const follow = new Follow(
-            result.idFollow,
-            result.idUserFollowing,
-            result.idUserFollowed);
-          follows.push(follow);
-        }
-        observer.next(follows);
-        observer.complete();
-      }, error => {
-        observer.error(error);
-        observer.complete();
-      })
-    });
-  }
-
+    getUserFollowingByUserId(idUser: number){
+      return new Observable<Follow[]>((observer) => {
+        this.http.get(this._url + "followed/" + idUser).subscribe((results: any) => {
+          const follows = [];
+          for (const result of results) {
+            const follow = new Follow(
+              result.idFollow,
+              result.idUserFollowing,
+              result.idUserFollowed,
+              result.followingUser);
+            follows.push(follow);
+          }
+          observer.next(follows);
+          observer.complete();
+        }, error => {
+          observer.error(error);
+          observer.complete();
+        })
+      });
+    }
+  */
   getIdFollowByUserFollowingAndUserFollowed(idUserFollowing: number, idUserFollowed: number){
     return new Observable<Follow>((observer) => {
       this.http.get(this._url + "?idUserFollowing=" + idUserFollowing + "&idUserFollowed=" + idUserFollowed).subscribe((result: any) => {

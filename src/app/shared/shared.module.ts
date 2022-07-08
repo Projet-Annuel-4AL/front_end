@@ -7,6 +7,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
   declarations: [],
@@ -22,7 +23,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatChipsModule,
   ]
 })
 export class SharedModule { }

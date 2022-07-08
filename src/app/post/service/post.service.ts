@@ -11,6 +11,7 @@ import {CreatePost} from "../domain/create-post.dto";
 import {Code} from "../post-body/domain/code.entity";
 import {Router} from "@angular/router";
 import {JwtTokenService} from "../../Authentication/services/jwt-token.service";
+import {Follow} from "../../user/components/profile/domain/follow";
 
 @Injectable()
 export class PostService {
@@ -141,5 +142,17 @@ export class PostService {
 
   addVideo(videoToAdd: CreateVideo) {
 
+  }
+
+  deletePostById(idPost: number){
+    return new Observable<Post>((observer) => {
+      this.http.delete(this._url + idPost).subscribe((result: any) => {
+        observer.next(result);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      })
+    });
   }
 }

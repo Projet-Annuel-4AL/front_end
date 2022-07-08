@@ -1,25 +1,41 @@
+<div style="margin-left: 30px;">
 <app-create-post></app-create-post>
+</div>
 <div class="container d-flex align-items-center justify-content-center" style="margin-top: 20px;">
   <div *ngIf="posts && posts.length > 0">
     <ul *ngFor=" let post of posts">
       <li>
         <mat-card>
-          <mat-card-header>
-            <mat-card-subtitle> <a [routerLink]="['user/profile', post.user.id]"> {{ post.user.firstName }} </a> </mat-card-subtitle>
-            <mat-card-subtitle>{{post.createdDate}} </mat-card-subtitle>
-            <mat-card-title>
-              <h5> {{post.title}}</h5>
-            </mat-card-title>
-          </mat-card-header>
-
-          <div *ngIf="post.code !== null">
-            <div style="width: 600px; height: 200px">
-              <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="post.code.content"></ngx-monaco-editor>
-            </div>
+          <div>
+            <ul class="container d-flex align-items-center justify-content-between">
+              <li>
+                  <mat-card-subtitle> <a [routerLink]="['user/profile', post.user.id]"> {{ post.user.firstName }} </a> </mat-card-subtitle>
+              </li>
+              <li>
+                <div *ngIf="post.user.id == currentUser">
+                  <button mat-button (click)="openDialog(post.idPost)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </li>
+            </ul>
+            <mat-card-header>
+              <mat-card-subtitle>{{post.createdDate}} </mat-card-subtitle>
+              <mat-card-title>
+                <h5> {{post.title}}</h5>
+              </mat-card-title>
+            </mat-card-header>
           </div>
-          <mat-card-content *ngIf="post.text !== null">
-            <p> {{post.text.content}}</p>
-          </mat-card-content>
+          <div style="margin-left: 15px;">
+            <div *ngIf="post.code !== null">
+              <div style="width: 600px; height: 200px">
+                <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="post.code.content"></ngx-monaco-editor>
+              </div>
+            </div>
+            <mat-card-content *ngIf="post.text !== null">
+              <p> {{post.text.content}}</p>
+            </mat-card-content>
+          </div>
           <mat-card-footer style="padding-bottom: 10px">
             <ul class="d-flex justify-content-sm-around">
               <li>

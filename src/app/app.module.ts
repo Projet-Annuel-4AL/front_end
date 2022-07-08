@@ -18,7 +18,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {DialogTemplateComponent} from "./dialog/components/dialog-template/dialog-template.component";
 import { DialogNotConnectedComponent } from './dialog-not-connected/dialog-not-connected.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +36,7 @@ import { DialogNotConnectedComponent } from './dialog-not-connected/dialog-not-c
     CoreModule,
     PostModule,
     AuthenticationModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, JwtTokenService,LocalStorageService],
   exports: [],

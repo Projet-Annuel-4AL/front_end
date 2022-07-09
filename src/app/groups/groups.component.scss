@@ -1,5 +1,12 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
 ul{
   list-style:none;
+}
+
+a{
+  text-decoration: none;
 }
 
 mat-chip {
@@ -10,3 +17,4 @@ mat-chip {
 .mat-standard-chip {
   height: 1px !important;
 }
+

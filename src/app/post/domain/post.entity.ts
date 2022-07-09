@@ -7,7 +7,7 @@ import {Like} from "../components/like/domain/like.entity";
 export class Post {
   readonly idPost: number;
   readonly title: string;
-  readonly createdDate: Date;
+           createdDate: string;
   readonly idVideo: number;
   readonly idPicture: number;
   readonly text: Text;
@@ -22,7 +22,7 @@ export class Post {
               likes: Like[]) {
     this.idPost = idPost;
     this.title = title;
-    this.createdDate = createdDate;
+    this.createdDate = new Date(createdDate).toLocaleDateString("fr-FR");
     this.idVideo = idVideo;
     this.idPicture = idPicture;
     this.text = text;
@@ -32,4 +32,6 @@ export class Post {
     this.likes = likes;
     this.numberOfRemarks = 0;
   }
+
+
 }

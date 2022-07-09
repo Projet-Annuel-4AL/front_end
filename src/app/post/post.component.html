@@ -13,7 +13,8 @@
               </li>
               <li>
                 <div *ngIf="post.user.id == currentUser">
-                  <button mat-button (click)="openDialog(post.idPost)">
+
+                  <button mat-raised-button color="warn" (click)="openDialog(post.idPost)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>

@@ -17,6 +17,7 @@ import {DashboardNotConnectedComponent} from "./dashboard/dashboard-not-connecte
 import {MatDialogModule} from '@angular/material/dialog';
 import {DialogTemplateComponent} from "./dialog/components/dialog-template/dialog-template.component";
 import {GroupService} from "./groups/service/group.service";
+import { DialogNotConnectedComponent } from './dialog-not-connected/dialog-not-connected.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {GroupService} from "./groups/service/group.service";
     PageNotFoundComponent,
     DashboardConnectedComponent,
     DashboardNotConnectedComponent,
-    DialogTemplateComponent
+    DialogTemplateComponent,
+    DialogNotConnectedComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,7 @@ import {GroupService} from "./groups/service/group.service";
     CoreModule,
     PostModule,
     AuthenticationModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, JwtTokenService,LocalStorageService, GroupService],
   exports: [],

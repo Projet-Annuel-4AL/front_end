@@ -15,6 +15,7 @@ export class DeletePostComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {idPost: number}, private _postService: PostService, private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
   onCancel(): void {

@@ -5,6 +5,8 @@ import {PostService} from "../../../post/service/post.service";
 import {Post} from "../../../post/domain/post.entity";
 import {UserService} from "../../../user/service/user.service";
 import {User} from "../../../user/domain/user.entity";
+import {GroupService} from "../../../groups/service/group.service";
+import {Group} from "../../../groups/domain/group.entity";
 
 
 @Component({
@@ -34,7 +36,10 @@ export class AdminOverviewComponent implements OnInit {
   editorOptions!: any;
   posts!: Post[];
   users!: User[];
-  constructor(private _postService: PostService,private _userService: UserService) { }
+  groups!: Group[];
+  constructor(private _postService: PostService,
+              private _userService: UserService,
+              private _groupService: GroupService) { }
 
 
   ngOnInit(): void {
@@ -46,6 +51,10 @@ export class AdminOverviewComponent implements OnInit {
     this._userService.getAllUser().subscribe(users => {
       this.users = users;
       console.log(this.users);
+    });
+    this._groupService.getGroups().subscribe(groups => {
+      this.groups = groups;
+      console.log(this.groups);
     });
     /*this.posts.forEach(function(post){
       console.log("post.code.language")

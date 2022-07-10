@@ -1,0 +1,56 @@
+
+<mat-table [dataSource]="posts" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Id">
+    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-cell *matCellDef="let post"> {{post.idPost}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Title">
+    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+    <mat-cell *matCellDef="let post"> {{post.title}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Created date">
+    <mat-header-cell *matHeaderCellDef> Created date </mat-header-cell>
+    <mat-cell *matCellDef="let post"> {{post.createdDate}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Text">
+    <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
+    <mat-cell *matCellDef="let post"> {{post.text}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Code">
+    <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+    <mat-cell *matCellDef="let post"> {{post.code}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="User">
+    <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+    <mat-cell *matCellDef="let post"> {{post.user.firstName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Remarks">
+    <mat-header-cell *matHeaderCellDef> Remarks </mat-header-cell>
+    <mat-cell *matCellDef="let post"> {{post.numberOfRemarks}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Likes">
+    <mat-header-cell *matHeaderCellDef> Likes </mat-header-cell>
+    <mat-cell *matCellDef="let post"> {{post.likes.length}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Delete">
+    <mat-header-cell *matHeaderCellDef> Delete Post </mat-header-cell>
+    <mat-cell *matCellDef="let post">
+      <button mat-button (click)="openDialog(post.idPost)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

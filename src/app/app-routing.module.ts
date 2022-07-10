@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'user', loadChildren:() => import("./user/user.module").then(m => m.UserModule) },
   { path: 'auth', loadChildren:() => import("./Authentication/authentication.module").then(m => m.AuthenticationModule) },
   { path: 'groups', loadChildren:() => import("./groups/groups.module").then(m => m.GroupsModule) },
+  { path: 'admin', loadChildren:() => import("./admin/admin.module").then(m => m.AdminModule) },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];
 

@@ -28,7 +28,7 @@ export class PostService {
           const post = new Post(
             result.id,
             result.title,
-            result.createdDate,
+            result.createdDate.split('T')[0],
             result.idVideo,
             result.idPicture,
             result.text,
@@ -57,7 +57,7 @@ export class PostService {
           const post = new Post(
             result.id,
             result.title,
-            result.createdDate,
+            result.createdDate.split('T')[0],
             result.idVideo,
             result.idPicture,
             result.text,
@@ -82,7 +82,7 @@ export class PostService {
         const post = new Post(
           result.id,
           result.title,
-          result.createdDate,
+          result.createdDate.split('T')[0],
           result.idVideo,
           result.idPicture,
           result.text,

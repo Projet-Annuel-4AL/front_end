@@ -17,6 +17,8 @@ import {DashboardNotConnectedComponent} from "./dashboard/dashboard-not-connecte
 import {MatDialogModule} from '@angular/material/dialog';
 import {DialogTemplateComponent} from "./dialog/components/dialog-template/dialog-template.component";
 import { DialogNotConnectedComponent } from './dialog-not-connected/dialog-not-connected.component';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { DialogNotConnectedComponent } from './dialog-not-connected/dialog-not-c
     PostModule,
     AuthenticationModule,
     MatDialogModule,
+    NgChartsModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, JwtTokenService,LocalStorageService],
   exports: [],

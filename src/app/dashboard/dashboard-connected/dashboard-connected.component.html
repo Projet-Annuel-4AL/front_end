@@ -1,5 +1,9 @@
 <mat-toolbar color="primary">
   <a routerLink="/">Palit</a>
+  <ng-template [ngIf]="idUser == 2">
+    <span> <a mat-button routerLink="admin" title="Espace Admin">	<mat-icon>settings</mat-icon></a> </span>
+  </ng-template>
+
   <div class="spacer"></div>
 
   <a mat-button routerLink="groups">Communauté </a>

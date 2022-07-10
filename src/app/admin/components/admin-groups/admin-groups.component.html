@@ -1,1 +1,34 @@
-<p>admin-groups works!</p>
+<mat-table [dataSource]="groups" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Id">
+    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-cell *matCellDef="let group"> {{group.idGroup}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let group"> {{group.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Theme">
+    <mat-header-cell *matHeaderCellDef> Theme </mat-header-cell>
+    <mat-cell *matCellDef="let group"> {{group.theme}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Description">
+    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+    <mat-cell *matCellDef="let group"> {{group.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Delete">
+    <mat-header-cell *matHeaderCellDef> Delete Groupe </mat-header-cell>
+    <mat-cell *matCellDef="let group">
+      <button mat-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

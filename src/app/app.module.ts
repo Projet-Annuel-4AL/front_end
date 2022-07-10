@@ -18,6 +18,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {DialogTemplateComponent} from "./dialog/components/dialog-template/dialog-template.component";
 import {GroupService} from "./groups/service/group.service";
 import { DialogNotConnectedComponent } from './dialog-not-connected/dialog-not-connected.component';
+import { NgChartsModule } from 'ng2-charts';
+
 
 
 @NgModule({
@@ -39,6 +41,7 @@ import { DialogNotConnectedComponent } from './dialog-not-connected/dialog-not-c
     PostModule,
     AuthenticationModule,
     MatDialogModule,
+    NgChartsModule
   ],
   providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, JwtTokenService,LocalStorageService, GroupService],
   exports: [],

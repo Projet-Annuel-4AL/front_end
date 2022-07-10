@@ -1,0 +1,36 @@
+
+<mat-table [dataSource]="users" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Id">
+    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="First name">
+    <mat-header-cell *matHeaderCellDef> First name </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.firstName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Last name">
+    <mat-header-cell *matHeaderCellDef> Last name </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.lastName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="mail">
+    <mat-header-cell *matHeaderCellDef> mail </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.mail}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Delete">
+    <mat-header-cell *matHeaderCellDef> Delete User </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <button mat-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+

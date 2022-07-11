@@ -19,7 +19,7 @@ import {DialogTemplateComponent} from "./dialog/components/dialog-template/dialo
 import {GroupService} from "./groups/service/group.service";
 import { DialogNotConnectedComponent } from './dialog-not-connected/dialog-not-connected.component';
 import { NgChartsModule } from 'ng2-charts';
-
+import {CodeService} from "./post/service/code.service";
 
 
 @NgModule({
@@ -43,7 +43,12 @@ import { NgChartsModule } from 'ng2-charts';
     MatDialogModule,
     NgChartsModule
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, JwtTokenService,LocalStorageService, GroupService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor, multi: true },
+    JwtTokenService,LocalStorageService,
+    GroupService,
+    CodeService],
   exports: [],
   bootstrap: [AppComponent],
 })

@@ -21,7 +21,7 @@ export class tempFollow{
 }
 @Injectable()
 export class FollowService {
-  private _url: string = "http://localhost:3000/api/follows/";
+  private _url: string = "http://52.208.34.20:3000/api/follows/";
 
   constructor(private http: HttpClient) {
   }

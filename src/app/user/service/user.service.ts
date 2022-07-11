@@ -6,14 +6,14 @@ import {User} from "../domain/user.entity";
 
 @Injectable()
 export class UserService {
-  private _url: string = "http://localhost:3000/api/users/";
+  private _url: string = "http://52.208.34.20:3000/api/users/";
 
   constructor(private http: HttpClient) {
   }
 
   getUserByID(idUser: number) {
     return new Observable<User>((observer) => {
-      this.http.get("http://localhost:3000/api/users/id/" + idUser).subscribe((result: any) => {
+      this.http.get("http://52.208.34.20:3000/api/users/id/" + idUser).subscribe((result: any) => {
         const user = new User(
           result.id,
           result.firstName,

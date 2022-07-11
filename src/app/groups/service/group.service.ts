@@ -6,7 +6,7 @@ import {CreateGroup} from "../domain/create-group.dto";
 
 @Injectable()
 export class GroupService {
-  private _url: string = "http://localhost:3000/api/groups/";
+  private _url: string = "http://52.208.34.20:3000/api/groups/";
 
   constructor(private http: HttpClient) {
   }

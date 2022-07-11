@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CreateRemark} from "../../../post/components/remarks-post/domain/create-remark.dto";
 import {CreateUserDto} from "../../../user/domain/create-user.dto";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
@@ -39,7 +38,7 @@ export class RegisterComponent {
   submitRegisterForm() {
 
     const user = new CreateUserDto(this.registerForm.value.firstName, this.registerForm.value.lastName, this.registerForm.value.mail, this.registerForm.value.password);
-    return this.http.post("http://localhost:3000/api/users", user).subscribe((result: any) => {
+    return this.http.post("http://52.208.34.20:3000/api/users", user).subscribe((result: any) => {
       this.loginAfterCreate(user.mail,user.password);
       this.registerForm.reset();
     });
@@ -47,7 +46,7 @@ export class RegisterComponent {
   loginAfterCreate(mail: string, password: string) {
     const body = {username: mail, password: password}
     this.http
-      .post("http://localhost:3000/api/auth/login", body).toPromise()
+      .post("http://52.208.34.20:3000/api/auth/login", body).toPromise()
       .then(response => {
 
         const tmp = JSON.stringify(response).split("\"");

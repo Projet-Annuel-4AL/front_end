@@ -1,4 +1,3 @@
-import {User} from "../../../domain/user.entity";
 
 export class Follow {
   readonly idFollow: number;

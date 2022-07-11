@@ -21,5 +21,7 @@ export class AdminGroupsComponent implements OnInit {
       console.log(this.groups);
     });
   }
-
+  deleteGroup(idGroupToDelete: number){
+    this._groupService.deleteGroupById(idGroupToDelete).subscribe();
+  }
 }

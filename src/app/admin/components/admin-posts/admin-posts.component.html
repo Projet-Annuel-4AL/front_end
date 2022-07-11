@@ -18,12 +18,12 @@
 
   <ng-container matColumnDef="Text">
     <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
-    <mat-cell *matCellDef="let post"> {{post.text}} </mat-cell>
+    <mat-cell *matCellDef="let post"> {{post.text != null? post.text.content:''}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="Code">
     <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
-    <mat-cell *matCellDef="let post"> {{post.code}} </mat-cell>
+    <mat-cell *matCellDef="let post"> {{post.code != null? post.code.content:''}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="User">
@@ -44,7 +44,7 @@
   <ng-container matColumnDef="Delete">
     <mat-header-cell *matHeaderCellDef> Delete Post </mat-header-cell>
     <mat-cell *matCellDef="let post">
-      <button mat-raised-button color="warn" (click)="openDialog(post.idPost)">
+      <button mat-raised-button color="warn" (click)="deletePost(post.idPost)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

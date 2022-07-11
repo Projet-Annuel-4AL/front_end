@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {PostService} from "../../../post/service/post.service";
 import {User} from "../../../user/domain/user.entity";
 import {Post} from "../../../post/domain/post.entity";
-import {DeletePostComponent} from "../../../post/components/delete-post/delete-post.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
@@ -29,11 +28,8 @@ export class AdminPostsComponent implements OnInit {
       }
     );
   }
-  openDialog(idPostToDelete: number): void {
-    console.log(idPostToDelete);
-    let dialogRef = this.dialog.open(DeletePostComponent, {
-      width: '400px',
-      data: {idPost: idPostToDelete}
-    });
+
+  deletePost(idPostToDelete: number){
+    this._postService.deletePostById(idPostToDelete).subscribe();
   }
 }

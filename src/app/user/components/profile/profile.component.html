@@ -2,7 +2,7 @@
   <div class="container d-flex align-items-center justify-content-center">
   <div class="card-body pt-0 pt-md-4">
     <div class="text-center">
-    <img class="avatar" src="https://yzgeneration.com/wp-content/uploads/2019/05/One-Punch-Man-Tome-15-Cover.jpg" style="max-height: 100px">
+    <img alt="" class="avatar" src="https://yzgeneration.com/wp-content/uploads/2019/05/One-Punch-Man-Tome-15-Cover.jpg" style="max-height: 100px">
       <h3>
          {{ user.firstName}} {{user.lastName}}
       </h3>
@@ -25,22 +25,14 @@
         </mat-card-title>
       </mat-card-header>
       <mat-tab-group class="center" dynamicHeight>
-        <mat-tab label="abonné">
-          <ul>
-            <li>al</li>
-            <li>al</li>
-            <li>al</li>
-            <li>al</li>
-            <li>al</li>
-            <li>al</li>
+        <mat-tab label="abonné :  {{followingUsers.length}}">
+          <ul *ngFor=" let followingUser of followingUsers">
+            <li>{{followingUser.userInfo.firstName}}</li>
           </ul>
         </mat-tab>
-        <mat-tab label="abonnement">
-          <ul>
-            <li>Lucas</li>
-            <li>Pierre</li>
-            <li>Lucie</li>
-            <li>Clara</li>
+        <mat-tab label="abonnement : {{followedUsers.length}}">
+          <ul *ngFor=" let followedUser of followedUsers">
+            <li>{{followedUser.userInfo.firstName}}</li>
           </ul>
         </mat-tab>
       </mat-tab-group>

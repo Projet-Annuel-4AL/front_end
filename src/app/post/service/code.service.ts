@@ -5,7 +5,7 @@ import {Code} from "../post-body/domain/code.entity";
 
 @Injectable()
 export class CodeService {
-  private _url: string = "http://localhost:3000/api/codes/";
+  private _url: string = "http://52.208.34.20:3000/api/codes/";
 
   constructor(private http: HttpClient) {
   }

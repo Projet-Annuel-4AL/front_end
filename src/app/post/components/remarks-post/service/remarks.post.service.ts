@@ -6,7 +6,7 @@ import {JwtTokenService} from "../../../../Authentication/services/jwt-token.ser
 
 @Injectable()
 export class RemarksPostService {
-  private _url: string = "http://localhost:3000/api/remarks/";
+  private _url: string = "http://52.208.34.20:3000/api/remarks/";
 
   constructor(private http: HttpClient, private _jwtTokenService: JwtTokenService) {
   }

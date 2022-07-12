@@ -29,6 +29,12 @@
       <mat-card-subtitle>{{remark.name}}</mat-card-subtitle>
       {{remark.content}}
     </div>
+    <div *ngIf="remark.idUser == currentUser">
+
+      <button mat-button (click)="deleteRemark(remark.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </ul>
   <ng-template [ngIf]="isConnected == true">
     <form [formGroup]="commentForm">

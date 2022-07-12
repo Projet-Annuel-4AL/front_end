@@ -30,7 +30,7 @@ export class RemarksPostComponent implements OnInit {
   });
   isConnected: boolean | undefined;
 
-
+  currentUser! : number;
 
   constructor(
     private _postService: PostService,
@@ -39,7 +39,9 @@ export class RemarksPostComponent implements OnInit {
     private _remarksService: RemarksPostService,
     private _jwtTokenService: JwtTokenService,
     private http: HttpClient
-  ) {}
+  ) {
+    this.currentUser =  Number(this._jwtTokenService.getIdUser());
+  }
 
   ngOnInit(): void {
     const routeParams = this._activatedRoute.snapshot.paramMap;
@@ -63,6 +65,7 @@ export class RemarksPostComponent implements OnInit {
         this.code = post.code.content;
       }
     });
+    console.log("remark",this.post);
   }
 
   getLangNumber() {
@@ -76,7 +79,7 @@ export class RemarksPostComponent implements OnInit {
     const body = {language: this.getLangNumber(), code: this.code};
 
     this.http
-      .post( "http://localhost:3000/api/compiler",body, {responseType: 'text'}).toPromise()
+      .post( "http://52.208.34.20:3000/api/compiler",body, {responseType: 'text'}).toPromise()
       .then(response => {
         this.output = response;
       })
@@ -86,11 +89,15 @@ export class RemarksPostComponent implements OnInit {
 
   submitCommentForm() {
     const remark = new CreateRemark(this.post.idPost, Number(this._jwtTokenService.getIdUser()), this.commentForm.value.content);
-    return this.http.post("http://localhost:3000/api/remarks", remark).subscribe((result: any) => {
+    return this.http.post("http://52.208.34.20:3000/api/remarks", remark).subscribe((result: any) => {
         console.log(result)
       this.commentForm.reset();
       this.ngOnInit();
     });
+  }
+
+  deleteRemark(idRemark: number){
+    this._remarksService.deleteRemarkById(idRemark);
   }
 
 }

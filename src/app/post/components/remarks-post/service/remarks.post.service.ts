@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Remark} from "../domain/remark.entity";
 import {JwtTokenService} from "../../../../Authentication/services/jwt-token.service";
+import {Post} from "../../../domain/post.entity";
 
 @Injectable()
 export class RemarksPostService {
@@ -26,5 +27,19 @@ export class RemarksPostService {
         observer.complete();
       })
     });
+  }
+
+
+
+  deleteRemarkById(idRemark: number){
+    this.http.delete(this._url + idRemark)
+      .subscribe({
+        next: data => {
+          console.log('Delete successful');
+        },
+        error: error => {
+          console.error('There was an error!');
+        }
+      });
   }
 }

@@ -57,7 +57,7 @@ export class CodeRunnerComponent implements OnInit {
     const body = {language: this.langNumber, code: this.code};
 
     this.http
-      .post( "http://localhost:3000/api/compiler",body, {responseType: 'text'}).toPromise()
+      .post( "http://52.208.34.20:3000/api/compiler",body, {responseType: 'text'}).toPromise()
       .then(response => {
         this.output = response;
         this.codeRunne = true;

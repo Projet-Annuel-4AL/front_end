@@ -4,10 +4,11 @@ import {HttpClient} from "@angular/common/http";
 import {Remark} from "../domain/remark.entity";
 import {JwtTokenService} from "../../../../Authentication/services/jwt-token.service";
 import {Post} from "../../../domain/post.entity";
+import {ApiUrlConstant} from "../../../../apiUrlConstant";
 
 @Injectable()
 export class RemarksPostService {
-  private _url: string = "http://52.208.34.20:3000/api/remarks/";
+  private _url: string = ApiUrlConstant.HOST+"remarks/";
 
   constructor(private http: HttpClient, private _jwtTokenService: JwtTokenService) {
   }

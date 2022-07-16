@@ -1,18 +1,18 @@
 <div class="container">
   <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
     <div *ngFor=" let group of groups" class="col-4" style="margin-bottom: 10px;">
-      <a [routerLink]="['./', group.idGroup]">
+      <a [routerLink]="['./id/', group.idGroup]">
       <mat-card>
         <ul class="container d-flex align-items-center justify-content-between">
           <li>
             <mat-card-title> {{group.name}} </mat-card-title>
             <mat-chip-list>
-              <a routerLink="/"> <mat-chip color="accent" selected> {{group.theme}} </mat-chip> </a>
+              <a> <mat-chip color="accent" selected> {{group.theme}} </mat-chip> </a>
             </mat-chip-list>
             </li>
           <li>
             <mat-card-content> Membres: </mat-card-content>
-            <mat-card-content style="text-align: center"> 4 </mat-card-content>
+            <mat-card-content style="text-align: center"> {{group.numberOfSubscriber}} </mat-card-content>
           </li>
         </ul>
         <mat-card-content>{{ group.description}} </mat-card-content>
@@ -22,7 +22,7 @@
     </div>
     <mat-card class="col-4" id="notFoundGroup">
       <mat-card-title style="margin-bottom: 15px;"> Vous n'avez pas trouvé de groupe ?</mat-card-title>
-      <a href="#"><img src="https://c.tenor.com/Gwlul7hykfIAAAAM/niff-patrick-star.gif" mat-card-image></a>
+      <a routerLink="./createGroup"><img src="https://c.tenor.com/Gwlul7hykfIAAAAM/niff-patrick-star.gif" mat-card-image></a>
       <mat-card-content style="font-weight: bold"> Créer votre propre groupe dès maintenant ! (clique sur patrick !)</mat-card-content>
     </mat-card>
   </div>

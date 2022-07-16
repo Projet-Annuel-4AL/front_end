@@ -6,11 +6,31 @@
         <mat-card class="mat-elevation-z0">
           <ul class="container d-flex align-items-center">
             <li>
-              <mat-card-title> Nom du Groupe </mat-card-title>
-              <mat-card-subtitle> theme du groupe </mat-card-subtitle>
+              <mat-card-title> {{group.name}} </mat-card-title>
+              <mat-card-subtitle> Crée par : {{creatorName}} </mat-card-subtitle>
             </li>
             <li style="margin-left: 20px; margin-bottom: 40px">
-              <a mat-button mat-raised-button color="accent">Rejoindre </a>
+              <mat-card-content *ngIf="group.idGroupOwner == currentUser ;else button_join">
+                <button mat-raised-button color="warn" (click)="deleteGroup(group.idGroup)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-card-content>
+              <ng-template #button_join>
+                <!--<a mat-button mat-raised-button color="accent">Rejoindre </a>-->
+                <button type="submit" mat-button mat-raised-button color="accent" (click)="setIsSubscribe()"
+                        [ngClass]="{'follow' : isSubscribe, 'notFollow': !isSubscribe}" >
+                  <ng-template [ngIf]="isSubscribe" [ngIfElse]="notFollowed">Abonné</ng-template>
+                  <ng-template #notFollowed >Rejoindre</ng-template>
+                </button>
+
+              </ng-template>
+            </li>
+            <li>
+              <ng-template *ngIf="group.idGroupOwner == currentUser">
+                <button mat-raised-button color="warn" (click)="deleteGroup(group.idGroup)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </ng-template>
             </li>
           </ul>
         </mat-card>
@@ -56,10 +76,11 @@
         <div  style="background-color: #673ab4; height: 30px; padding-bottom: 40px; padding-top: 10px">
           <mat-card-content style="color: white; font-weight: bold; font-size: 20px; text-align: center"> A propos  </mat-card-content>
         </div>
-        <mat-card-content style="padding: 15px"> An anime subreddit that's friendly for women, queer people, and generally marginalized anime fans who want a break from how toxic anime spaces usually are. Of course, anyone is welcome, but be respectful to the intention of the space. Also consider joining us on discord! https://discord.com/invite/axisorder
+        <mat-card-content style="padding: 15px">
+          {{group.description}}
         </mat-card-content>
         <div class="d-flex justify-content-md-center">
-            <mat-card-content> 33 Membres </mat-card-content>
+            <mat-card-content> {{groupRelation.length}} Membres </mat-card-content>
         </div>
         <hr>
         <div class="d-flex justify-content-start">
@@ -69,7 +90,7 @@
         <div style="padding: 10px">
 
         <mat-chip-list>
-          <a routerLink="/"> <mat-chip color="accent" selected> Anime </mat-chip> </a>
+          <a> <mat-chip color="accent" selected> {{group.theme}} </mat-chip> </a>
         </mat-chip-list>
         </div>
       </mat-card>

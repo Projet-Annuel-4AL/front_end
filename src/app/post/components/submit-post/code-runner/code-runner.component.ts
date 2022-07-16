@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { FormGroup } from "@angular/forms";
 import {CreateCode} from "../../../post-body/create-code.dto";
 import {PostService} from "../../../service/post.service";
+import {ApiUrlConstant} from "../../../../apiUrlConstant";
 
 @Component({
   selector: 'app-code-runner',
@@ -57,7 +58,7 @@ export class CodeRunnerComponent implements OnInit {
     const body = {language: this.langNumber, code: this.code};
 
     this.http
-      .post( "http://52.208.34.20:3000/api/compiler",body, {responseType: 'text'}).toPromise()
+      .post( ApiUrlConstant.HOST+"compiler",body, {responseType: 'text'}).toPromise()
       .then(response => {
         this.output = response;
         this.codeRunne = true;

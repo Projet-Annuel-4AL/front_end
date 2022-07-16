@@ -20,7 +20,7 @@ export class DashboardConnectedComponent implements OnInit {
 
   deconnection(): void {
     this._jwtTokenService.getDecodeToken()
-    this._localStorageService.remove("JWTToken");
+    this._localStorageService.remove("JwtAccessToken");
     this._router.navigateByUrl("")
       .then(() => {
         window.location.reload();

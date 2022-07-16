@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Like} from "../post/components/like/domain/like.entity";
 import {Group} from "./domain/group.entity";
 import {GroupService} from "./service/group.service";
 
@@ -21,6 +20,11 @@ export class GroupsComponent implements OnInit {
   getGroups(){
     this._groupService.getGroups().subscribe( groups => {
       this.groups = groups
+      this.groups.forEach(element =>
+        this._groupService.getUserSubscribeByGroup(element.idGroup).subscribe(relation=>{
+          element.numberOfSubscriber = relation.length;
+        })
+      );
     })
   }
 }

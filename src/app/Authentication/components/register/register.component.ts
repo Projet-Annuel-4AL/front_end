@@ -4,6 +4,7 @@ import {CreateUserDto} from "../../../user/domain/create-user.dto";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../../services/local-storage.service";
+import {ApiUrlConstant} from "../../../apiUrlConstant";
 
 @Component({
   selector: 'app-register',
@@ -38,21 +39,21 @@ export class RegisterComponent {
   submitRegisterForm() {
 
     const user = new CreateUserDto(this.registerForm.value.firstName, this.registerForm.value.lastName, this.registerForm.value.mail, this.registerForm.value.password);
-    return this.http.post("http://52.208.34.20:3000/api/users", user).subscribe((result: any) => {
+    return this.http.post(ApiUrlConstant.HOST+"auth/register", user).subscribe((result: any) => {
       this.loginAfterCreate(user.mail,user.password);
       this.registerForm.reset();
     });
   }
   loginAfterCreate(mail: string, password: string) {
-    const body = {username: mail, password: password}
+    const body = {mail: mail, password: password}
     this.http
-      .post("http://52.208.34.20:3000/api/auth/login", body).toPromise()
+      .post(ApiUrlConstant.HOST+"auth/login", body).toPromise()
       .then(response => {
 
         const tmp = JSON.stringify(response).split("\"");
         this.token = tmp[3];
 
-        this.localStorage.set("JWTToken", this.token);
+        this.localStorage.set("JwtAccessToken", this.token);
         this.router.navigateByUrl('').then(() => {
           window.location.reload()
         });

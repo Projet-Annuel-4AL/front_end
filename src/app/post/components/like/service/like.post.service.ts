@@ -5,10 +5,11 @@ import {JwtTokenService} from "../../../../Authentication/services/jwt-token.ser
 import {Observable} from "rxjs";
 import {CreateLikeDto} from "../domain/create-like.dto";
 import {Post} from "../../../domain/post.entity";
+import {ApiUrlConstant} from "../../../../apiUrlConstant";
 
 @Injectable()
 export class LikePostService {
-  private _url: string = "http://52.208.34.20:3000/api/likes";
+  private _url: string = ApiUrlConstant.HOST+"likes";
 
   isLiked: boolean = false;
 

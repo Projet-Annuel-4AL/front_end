@@ -41,48 +41,55 @@
   </div>
 </mat-card>
 <br>
-<div class="container">
-<div *ngIf="posts && posts.length > 0">
-  <ul *ngFor=" let post of posts">
-    <li>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-subtitle> {{ post.user.firstName }} </mat-card-subtitle>
-          <mat-card-subtitle>{{post.createdDate}} </mat-card-subtitle>
-          <mat-card-title>
-            <h5> {{post.title}}</h5>
-          </mat-card-title>
-        </mat-card-header>
-        <div *ngIf="post.code !== null">
-          <div style="width: 600px; height: 200px">
-            <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="post.code.content"></ngx-monaco-editor>
+<div class="container d-flex align-items-center justify-content-center" style="margin-top: 20px;">
+  <div *ngIf="posts && posts.length > 0">
+    <ul *ngFor=" let post of posts">
+      <li>
+        <mat-card>
+          <div>
+            <ul class="container d-flex align-items-center justify-content-between">
+              <li>
+                <mat-card-subtitle> {{ post.user.firstName }} </mat-card-subtitle>
+              </li>
+            </ul>
+            <mat-card-header>
+              <mat-card-subtitle>{{post.createdDate}} </mat-card-subtitle>
+              <mat-card-title>
+                <h5> {{post.title}}</h5>
+              </mat-card-title>
+            </mat-card-header>
           </div>
-        </div>
-        <mat-card-content *ngIf="post.text !== null">
-          <p> {{post.text.content}}</p>
-        </mat-card-content>
-        <hr>
-        <mat-card-footer style="padding-bottom: 5px">
-          <ul class="d-flex justify-content-sm-around">
-            <li>
-              <app-like [post]="post"></app-like>
-            </li>
-            <li>
-              <a mat-button [routerLink]="['/remark-post/', post.idPost]">
-                <mat-icon> comment </mat-icon>
-                Commentaires
-              </a>
-            </li>
-            <li>
-              <button mat-button>
-                <mat-icon> share </mat-icon>
-                Partager
-              </button>
-            </li>
-          </ul>
-        </mat-card-footer>
-      </mat-card>
-    </li>
-  </ul>
-</div>
+          <div style="margin-left: 15px;">
+            <div *ngIf="post.code !== null">
+              <div style="width: 600px; height: 200px">
+                <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="post.code.content"></ngx-monaco-editor>
+              </div>
+            </div>
+            <mat-card-content *ngIf="post.text !== null">
+              <p [innerHTML] = "post.text.content"></p>
+            </mat-card-content>
+          </div>
+          <mat-card-footer style="padding-bottom: 5px">
+            <ul class="d-flex justify-content-sm-around">
+              <li>
+                <app-like [post]="post"></app-like>
+              </li>
+              <li>
+                <ng-template [ngIf]="post.numberOfRemarks > 0">
+                  <span> {{post.numberOfRemarks}} </span>
+                </ng-template>
+                <a mat-button [routerLink]="['/remark-post/', post.idPost]">
+                  <mat-icon> mode_comment</mat-icon>
+                  Commentaires
+                </a>
+              </li>
+              <li>
+                <app-share-post></app-share-post>
+              </li>
+            </ul>
+          </mat-card-footer>
+        </mat-card>
+      </li>
+    </ul>
+  </div>
 </div>

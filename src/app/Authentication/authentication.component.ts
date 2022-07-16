@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LocalStorageService} from "./services/local-storage.service";
 import {JwtTokenService} from "./services/jwt-token.service";
+import {ApiUrlConstant} from "../apiUrlConstant";
 
 @Component({
   selector: 'app-authentication',
@@ -24,7 +25,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   isConnected() : void {
-    let jwtTokenKey: string = "JWTToken";
+    let jwtTokenKey: string = "JwtAccessToken";
 
     let jwtTokenValue: string | null =  this.localStorage.get(jwtTokenKey)
 
@@ -42,7 +43,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   getUser(mail: string | null){
-    let path  = "http://52.208.34.20:3000/api/users/" + mail;
+    let path  = ApiUrlConstant.HOST+"users/" + mail;
     this.http
       .get<any>(path).toPromise()
       .then(response => {

@@ -9,6 +9,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {JwtTokenService} from "../../../Authentication/services/jwt-token.service";
 import {CreateRemark} from "./domain/create-remark.dto";
 import {UserService} from "../../../user/service/user.service";
+import {ApiUrlConstant} from "../../../apiUrlConstant";
 
 @Component({
   selector: 'app-remarks-post',
@@ -65,7 +66,6 @@ export class RemarksPostComponent implements OnInit {
         this.code = post.code.content;
       }
     });
-    console.log("remark",this.post);
   }
 
   getLangNumber() {
@@ -79,7 +79,7 @@ export class RemarksPostComponent implements OnInit {
     const body = {language: this.getLangNumber(), code: this.code};
 
     this.http
-      .post( "http://52.208.34.20:3000/api/compiler",body, {responseType: 'text'}).toPromise()
+      .post( ApiUrlConstant.HOST+"compiler",body, {responseType: 'text'}).toPromise()
       .then(response => {
         this.output = response;
       })
@@ -89,7 +89,7 @@ export class RemarksPostComponent implements OnInit {
 
   submitCommentForm() {
     const remark = new CreateRemark(this.post.idPost, Number(this._jwtTokenService.getIdUser()), this.commentForm.value.content);
-    return this.http.post("http://52.208.34.20:3000/api/remarks", remark).subscribe((result: any) => {
+    return this.http.post(ApiUrlConstant.HOST+"remarks", remark).subscribe((result: any) => {
         console.log(result)
       this.commentForm.reset();
       this.ngOnInit();

@@ -4,6 +4,7 @@ import {Injectable} from "@angular/core";
 import {CreateFollowDto} from "../domain/create-follow.dto";
 import {Follow} from "../domain/follow";
 import {User} from "../../../domain/user.entity";
+import {ApiUrlConstant} from "../../../../apiUrlConstant";
 
 export class tempFollow{
   readonly idFollow: number;
@@ -21,7 +22,7 @@ export class tempFollow{
 }
 @Injectable()
 export class FollowService {
-  private _url: string = "http://52.208.34.20:3000/api/follows/";
+  private _url: string = ApiUrlConstant.HOST+"follows/";
 
   constructor(private http: HttpClient) {
   }

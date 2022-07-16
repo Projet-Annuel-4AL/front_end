@@ -9,7 +9,9 @@
           <div>
             <ul class="container d-flex align-items-center justify-content-between">
               <li>
-                  <mat-card-subtitle> <a [routerLink]="['user/profile', post.user.id]"> {{ post.user.firstName }} </a> </mat-card-subtitle>
+                  <mat-card-subtitle>
+                    <a [routerLink]="['user/profile', post.user.id]" style="text-decoration: none; color: #673ab4; font-size: 17px"> {{ post.user.firstName }}</a>
+                  </mat-card-subtitle>
               </li>
               <li>
                 <div *ngIf="post.user.id == currentUser">
@@ -34,7 +36,7 @@
               </div>
             </div>
             <mat-card-content *ngIf="post.text !== null">
-              <p> {{post.text.content}}</p>
+              <p [innerHTML] = "post.text.content"></p>
             </mat-card-content>
           </div>
           <mat-card-footer style="padding-bottom: 10px">
@@ -47,7 +49,7 @@
                   <span> {{post.numberOfRemarks}} </span>
                 </ng-template>
                 <a mat-button [routerLink]="['/remark-post/', post.idPost]">
-                  <mat-icon>mode_comment </mat-icon>
+                  <mat-icon>mode_comment</mat-icon>
                   Commentaires
                 </a>
               </li>

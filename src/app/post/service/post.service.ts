@@ -11,10 +11,11 @@ import {CreatePost} from "../domain/create-post.dto";
 import {Code} from "../post-body/domain/code.entity";
 import {Router} from "@angular/router";
 import {JwtTokenService} from "../../Authentication/services/jwt-token.service";
+import {ApiUrlConstant} from "../../apiUrlConstant";
 
 @Injectable()
 export class PostService {
-  private _url: string = "http://52.208.34.20:3000/api/posts/";
+  private _url: string = ApiUrlConstant.HOST+"posts/";
 
   constructor(private http: HttpClient, private _router: Router, private _jwtTokenService: JwtTokenService) {
   }
@@ -64,6 +65,7 @@ export class PostService {
             result.user,
             result.remarks,
             result.likes);
+          post.numberOfRemarks = result.remarks.length;
           posts.push(post);
         }
         observer.next(posts);
@@ -117,7 +119,7 @@ export class PostService {
 
   addCode(codeToAdd: CreateCode, title: string) {
     return new Observable<Code>((observer) => {
-      this.http.post("http://52.208.34.20:3000/api/codes", codeToAdd).subscribe( (code: any) =>  {
+      this.http.post(ApiUrlConstant.HOST+"codes", codeToAdd).subscribe( (code: any) =>  {
         const createPost: CreatePost = new CreatePost(title, null, null, null, code.id, Number(this._jwtTokenService.getIdUser()));
         this.addPost(createPost).subscribe();
         observer.complete();
@@ -127,7 +129,7 @@ export class PostService {
 
   addText(textToAdd: CreateText, title: string) {
     return new Observable<Text>((observer) => {
-      this.http.post("http://52.208.34.20:3000/api/texts", textToAdd).subscribe( (text: any) =>  {
+      this.http.post(ApiUrlConstant.HOST+"texts", textToAdd).subscribe( (text: any) =>  {
           const createPost: CreatePost = new CreatePost(title, null, null, text.id, null, Number(this._jwtTokenService.getIdUser()));
           this.addPost(createPost).subscribe();
           observer.complete();
@@ -144,8 +146,10 @@ export class PostService {
   }
 
   deletePostById(idPost: number){
+    console.log("idpost", idPost)
     return new Observable<Post>((observer) => {
       this.http.delete(this._url + idPost).subscribe((result: any) => {
+        console.log(result);
         observer.next(result);
         observer.complete();
       }, error => {

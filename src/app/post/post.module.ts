@@ -35,12 +35,13 @@ import {MatDialogModule} from "@angular/material/dialog";
     SharePostComponent,
     DeletePostComponent
   ],
-  exports: [
-    PostComponent,
-    CreatePostComponent,
-    LikeComponent,
+    exports: [
+        PostComponent,
+        CreatePostComponent,
+        LikeComponent,
+        SharePostComponent,
 
-  ],
+    ],
   providers:[PostService, RemarksPostService, UserService, LikePostService],
 
   imports: [

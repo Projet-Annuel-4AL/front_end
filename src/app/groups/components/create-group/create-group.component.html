@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-header class="center">
+    <mat-card-title>
+      <h3></h3>
+      <hr>
+    </mat-card-title>
+  </mat-card-header>
+  <div class="center">
+  </div>
+  <div class="container d-flex align-items-center justify-content-center">
+    <form [formGroup]="createGroupForm">
+      <mat-card-content>
+        <div class="form-group">
+          <input type="text" class="form-control" id="name" formControlName="name" placeholder="Nom du goupe">
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div class="form-group">
+          <input type="text" class="form-control" id="theme" formControlName="theme" placeholder="Theme du groupe">
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div class="form-group">
+          <input type="text" class="form-control" id="description" formControlName="description"
+                 placeholder="Description">
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <div class="center">
+          <button type="submit" mat-raised-button color="primary" [disabled]="!createGroupForm.valid"
+                  (click)="submitCreateGroupForm()">
+            Créer
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </div>
+</mat-card>

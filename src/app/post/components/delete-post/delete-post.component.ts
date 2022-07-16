@@ -23,9 +23,11 @@ export class DeletePostComponent implements OnInit {
   }
 
   deletePost(){
-    this._postService.deletePostById(this.data.idPost).subscribe()
-    this.router.navigateByUrl('').then(() => {
-      window.location.reload()
-    });
+    this._postService.deletePostById(this.data.idPost).subscribe(result=>{
+      this.router.navigateByUrl('').then(() => {
+        window.location.reload()
+      });
+    })
+
   }
 }

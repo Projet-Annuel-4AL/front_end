@@ -2,10 +2,11 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Code} from "../post-body/domain/code.entity";
+import {ApiUrlConstant} from "../../apiUrlConstant";
 
 @Injectable()
 export class CodeService {
-  private _url: string = "http://52.208.34.20:3000/api/codes/";
+  private _url: string = ApiUrlConstant.HOST+"codes/";
 
   constructor(private http: HttpClient) {
   }

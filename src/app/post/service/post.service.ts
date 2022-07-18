@@ -12,12 +12,16 @@ import {Code} from "../post-body/domain/code.entity";
 import {Router} from "@angular/router";
 import {JwtTokenService} from "../../Authentication/services/jwt-token.service";
 import {ApiUrlConstant} from "../../apiUrlConstant";
+import {GroupService} from "../../groups/service/group.service";
 
 @Injectable()
 export class PostService {
   private _url: string = ApiUrlConstant.HOST+"posts/";
 
-  constructor(private http: HttpClient, private _router: Router, private _jwtTokenService: JwtTokenService) {
+  constructor(private http: HttpClient,
+              private _router: Router,
+              private _jwtTokenService: JwtTokenService,
+              private _groupService: GroupService) {
   }
 
   getPosts() {
@@ -100,9 +104,15 @@ export class PostService {
     });
   }
 
-  addPost(postToAdd: CreatePost) {
+  addPost(postToAdd: CreatePost, idGroup: number) {
+    console.log('idgroup', idGroup);
     return new Observable<Post>((observer) => {
       this.http.post(this._url, postToAdd).subscribe((result: any) => {
+        console.log("resultat post", result.id);
+        if(idGroup != null){
+          console.log('on est dans le if', idGroup);
+          this._groupService.addRelationBetweenGroupAndPost(idGroup,result.id);
+        }
         this._router.navigateByUrl("")
           .then(() => {
             window.location.reload();
@@ -117,21 +127,22 @@ export class PostService {
 
   }
 
-  addCode(codeToAdd: CreateCode, title: string) {
+  addCode(codeToAdd: CreateCode, title: string, idGroup: number) {
     return new Observable<Code>((observer) => {
       this.http.post(ApiUrlConstant.HOST+"codes", codeToAdd).subscribe( (code: any) =>  {
         const createPost: CreatePost = new CreatePost(title, null, null, null, code.id, Number(this._jwtTokenService.getIdUser()));
-        this.addPost(createPost).subscribe();
+        this.addPost(createPost, idGroup).subscribe();
         observer.complete();
       })
     });
   }
 
-  addText(textToAdd: CreateText, title: string) {
+  addText(textToAdd: CreateText, title: string, idGroup: number) {
+    console.log('idgroup', idGroup);
     return new Observable<Text>((observer) => {
       this.http.post(ApiUrlConstant.HOST+"texts", textToAdd).subscribe( (text: any) =>  {
           const createPost: CreatePost = new CreatePost(title, null, null, text.id, null, Number(this._jwtTokenService.getIdUser()));
-          this.addPost(createPost).subscribe();
+          this.addPost(createPost, idGroup).subscribe();
           observer.complete();
       })
     });

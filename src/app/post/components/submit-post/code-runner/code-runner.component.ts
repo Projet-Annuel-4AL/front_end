@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { FormGroup } from "@angular/forms";
 import {CreateCode} from "../../../post-body/create-code.dto";
 import {PostService} from "../../../service/post.service";
 import {ApiUrlConstant} from "../../../../apiUrlConstant";
+import {JwtTokenService} from "../../../../Authentication/services/jwt-token.service";
+import {GroupService} from "../../../../groups/service/group.service";
+import {Group} from "../../../../groups/domain/group.entity";
 
 @Component({
   selector: 'app-code-runner',
@@ -21,8 +24,15 @@ export class CodeRunnerComponent implements OnInit {
   codeRunne: boolean = false;
 
   postForm!: FormGroup;
+  currentUser! : number
+  groupList!: Group[];
 
-  constructor(private http: HttpClient, private postService: PostService) { }
+  constructor(private http: HttpClient,
+              private postService: PostService,
+              private _jwtTokenService: JwtTokenService,
+              private _groupService: GroupService) {
+    this.currentUser =  Number(this._jwtTokenService.getIdUser())
+  }
 
   ngOnInit(): void {
     this.title = '';
@@ -30,6 +40,10 @@ export class CodeRunnerComponent implements OnInit {
     this.theme = 'vs-dark'
     this.editorOptions = {readOnly: false, theme: this.theme, language: this.language, automaticLayout: true};
     this.code = 'public class Main{\n\tpublic static void main(String [] args){\n\t\tSystem.out.println("Hello Java!");\n\t}\n}';
+    this._groupService.getGroupRelationByUserId(this.currentUser).subscribe(result=>{
+      this.groupList = result;
+      console.log("listes des groupes", this.groupList);
+    });
   }
 
   onChangeLanguageToJava(){
@@ -76,10 +90,10 @@ export class CodeRunnerComponent implements OnInit {
     }
     return true;
   }
-
   submitPostForm() {
+    const idGroup = 1;
     this.getLangNumber()
     const createCode: CreateCode = new CreateCode(this.langNumber, this.code);
-    this.postService.addCode(createCode, this.title).subscribe();
+    this.postService.addCode(createCode, this.title, idGroup).subscribe();
   }
 }

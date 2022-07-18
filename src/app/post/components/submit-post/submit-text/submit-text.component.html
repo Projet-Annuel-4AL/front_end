@@ -6,6 +6,17 @@
       <div class="form-group">
         <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
       </div>
+      <br>
+      <div class="form-group center" >
+        <mat-form-field appearance="fill">
+          <mat-label>Relier a un groupe</mat-label>
+          <mat-select name="group" formControlName="group">
+            <mat-option *ngFor="let group of groupList" [value]="group.idGroup">
+              {{group.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <mat-card-actions>
         <div class="center">
           <button type="submit" mat-raised-button color="primary" [disabled]="!postForm.valid" (click)="submitPostForm()">

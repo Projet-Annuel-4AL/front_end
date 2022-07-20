@@ -116,6 +116,7 @@ export class GroupService {
             result.id,
             result.idUser,
             result.idGroup);
+          relation.user = result.user;
           relations.push(relation);
         }
         observer.next(relations);

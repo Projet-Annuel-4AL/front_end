@@ -7,6 +7,8 @@ import {UserService} from "../../../user/service/user.service";
 import {GroupRelationEntity} from "../../domain/group-relation.entity";
 import {CreateRelationDto} from "../../domain/create-relation.dto";
 import {Post} from "../../../post/domain/post.entity";
+import {MatDialog} from "@angular/material/dialog";
+import {UserGroupDialogComponent} from "../user-group-dialog/user-group-dialog.component";
 
 @Component({
   selector: 'app-group',
@@ -28,7 +30,8 @@ export class GroupComponent implements OnInit {
               private _groupService: GroupService,
               private _jwtTokenService: JwtTokenService,
               private _userService: UserService,
-              private _router: Router) {
+              private _router: Router,
+              public dialog: MatDialog) {
     this.currentUser =  Number(this._jwtTokenService.getIdUser())
   }
 
@@ -91,6 +94,20 @@ export class GroupComponent implements OnInit {
       console.log('test get post',result);
       this.posts = result;
     });
+  }
+
+  openDialog(idGroup: number): void {
+    console.log(idGroup)
+
+    this._groupService.getUserSubscribeByGroup(idGroup).subscribe(results=>{
+      const listUser = [];
+      for (const result of results) {
+        listUser.push(result.user.firstName);
+      }
+      let dialogRef = this.dialog.open(UserGroupDialogComponent, {
+        data: { listUser: listUser}
+      });
+    });;
 
   }
 }

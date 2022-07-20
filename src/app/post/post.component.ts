@@ -17,7 +17,10 @@ export class PostComponent implements OnInit {
   editorOptions!: any;
   currentUser! : number
 
-  constructor(private _postService: PostService, private _likeService: LikePostService, public dialog: MatDialog, private _jwtTokenService: JwtTokenService) {
+  constructor(private _postService: PostService,
+              private _likeService: LikePostService,
+              public dialog: MatDialog,
+              private _jwtTokenService: JwtTokenService) {
     this.currentUser =  Number(this._jwtTokenService.getIdUser())
   }
 

@@ -1,6 +1,5 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { FormGroup } from "@angular/forms";
 import {CreateCode} from "../../../post-body/create-code.dto";
 import {PostService} from "../../../service/post.service";
 import {ApiUrlConstant} from "../../../../apiUrlConstant";
@@ -21,11 +20,10 @@ export class CodeRunnerComponent implements OnInit {
   code!: string;
   editorOptions!: any;
   output!: string;
-  codeRunne: boolean = false;
-
-  postForm!: FormGroup;
-  currentUser! : number
+  codeRunner: boolean = false;
+  currentUser! : number;
   groupList!: Group[];
+  groupId!: any;
 
   constructor(private http: HttpClient,
               private postService: PostService,
@@ -35,6 +33,7 @@ export class CodeRunnerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.groupId = null;
     this.title = '';
     this.language = 'java';
     this.theme = 'vs-dark'
@@ -42,7 +41,6 @@ export class CodeRunnerComponent implements OnInit {
     this.code = 'public class Main{\n\tpublic static void main(String [] args){\n\t\tSystem.out.println("Hello Java!");\n\t}\n}';
     this._groupService.getGroupRelationByUserId(this.currentUser).subscribe(result=>{
       this.groupList = result;
-      console.log("listes des groupes", this.groupList);
     });
   }
 
@@ -67,7 +65,7 @@ export class CodeRunnerComponent implements OnInit {
     if (this.language == 'java') this.langNumber = 0;
   }
   onRunCode(){
-    this.codeRunne = false;
+    this.codeRunner = false;
     this.getLangNumber()
     const body = {language: this.langNumber, code: this.code};
 
@@ -75,7 +73,7 @@ export class CodeRunnerComponent implements OnInit {
       .post( ApiUrlConstant.HOST+"compiler",body, {responseType: 'text'}).toPromise()
       .then(response => {
         this.output = response;
-        this.codeRunne = true;
+        this.codeRunner = true;
       })
       .catch( err => {
         console.log(err)
@@ -83,15 +81,18 @@ export class CodeRunnerComponent implements OnInit {
   }
 
   isNotValidPost(): boolean{
-    if(this.codeRunne){
+    if(this.codeRunner){
       if (this.title.length > 0){
         return false
       }
     }
     return true;
   }
+  change(value: any) {
+    this.groupId = value;
+  }
   submitPostForm() {
-    const idGroup = 1;
+    const idGroup = this.groupId;
     this.getLangNumber()
     const createCode: CreateCode = new CreateCode(this.langNumber, this.code);
     this.postService.addCode(createCode, this.title, idGroup).subscribe();

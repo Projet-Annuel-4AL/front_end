@@ -18,7 +18,6 @@ export class AdminGroupsComponent implements OnInit {
   ngOnInit(): void {
     this._groupService.getGroups().subscribe(groups => {
       this.groups = groups;
-      console.log(this.groups);
     });
   }
   deleteGroup(idGroupToDelete: number){

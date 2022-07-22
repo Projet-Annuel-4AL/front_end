@@ -87,7 +87,6 @@ export class SubmitTextComponent{
   ngOnInit(): void {
     this._groupService.getGroupRelationByUserId(this.currentUser).subscribe(result=>{
       this.groupList = result;
-      console.log("listes des groupes", this.groupList);
     });
 
   }

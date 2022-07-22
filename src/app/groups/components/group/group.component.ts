@@ -50,7 +50,6 @@ export class GroupComponent implements OnInit {
     this._groupService.getUserSubscribeByGroup(idGroup).subscribe(result=>{
       this.groupRelation = result;
     });
-    console.log(this.groupRelation);
 
   }
 
@@ -73,7 +72,6 @@ export class GroupComponent implements OnInit {
   }
   addSubscribe(){
     let createRelationDto = new CreateRelationDto(this.currentUser,this.group.idGroup);
-    console.log(createRelationDto);
     this._groupService.addRelation(createRelationDto);
   }
 
@@ -91,13 +89,11 @@ export class GroupComponent implements OnInit {
 
   getPostFromGroup(idGroup: number){
     this._groupService.getRelationGroupPostByIdGroup(idGroup).subscribe(result=>{
-      console.log('test get post',result);
       this.posts = result;
     });
   }
 
   openDialog(idGroup: number): void {
-    console.log(idGroup)
 
     this._groupService.getUserSubscribeByGroup(idGroup).subscribe(results=>{
       const listUser = [];

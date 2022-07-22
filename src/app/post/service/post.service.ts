@@ -105,12 +105,9 @@ export class PostService {
   }
 
   addPost(postToAdd: CreatePost, idGroup: number) {
-    console.log('idgroup', idGroup);
     return new Observable<Post>((observer) => {
       this.http.post(this._url, postToAdd).subscribe((result: any) => {
-        console.log("resultat post", result.id);
         if(idGroup != null){
-          console.log('on est dans le if', idGroup);
           this._groupService.addRelationBetweenGroupAndPost(idGroup,result.id);
         }
         this._router.navigateByUrl("")
@@ -138,7 +135,6 @@ export class PostService {
   }
 
   addText(textToAdd: CreateText, title: string, idGroup: number) {
-    console.log('idgroup', idGroup);
     return new Observable<Text>((observer) => {
       this.http.post(ApiUrlConstant.HOST+"texts", textToAdd).subscribe( (text: any) =>  {
           const createPost: CreatePost = new CreatePost(title, null, null, text.id, null, Number(this._jwtTokenService.getIdUser()));
@@ -157,7 +153,6 @@ export class PostService {
   }
 
   deletePostById(idPost: number){
-    console.log("idpost", idPost)
     return new Observable<Post>((observer) => {
       this.http.delete(this._url + idPost).subscribe((result: any) => {
         console.log(result);

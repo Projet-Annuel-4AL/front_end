@@ -36,7 +36,6 @@ export class PostComponent implements OnInit {
   }
 
   openDialog(idPostToDelete: number): void {
-    console.log(idPostToDelete);
     let dialogRef = this.dialog.open(DeletePostComponent, {
       width: '400px',
       data: { idPost:  idPostToDelete}

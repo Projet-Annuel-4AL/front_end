@@ -8,7 +8,7 @@ import {CollaborationComponent} from "./components/collaboration/collaboration.c
 const routes: Routes = [
   { path: '',  component: GroupsComponent},
   { path: 'createGroup',  component: CreateGroupComponent},
-  { path: 'id/:idGroup/collab/:idGroup',  component: CollaborationComponent},
+  { path: 'collab/:idGroup',  component: CollaborationComponent},
   { path: 'id/:idGroup',  component: GroupComponent},
 
 

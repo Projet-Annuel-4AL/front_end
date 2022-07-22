@@ -5,6 +5,8 @@ import {LikePostService} from "./components/like/service/like.post.service";
 import {DeletePostComponent} from "./components/delete-post/delete-post.component";
 import {MatDialog} from "@angular/material/dialog";
 import {JwtTokenService} from "../Authentication/services/jwt-token.service";
+import {SseService} from "../mercure/sse.service";
+import {MercureService} from "../mercure/mercure.service";
 
 
 @Component({
@@ -20,7 +22,9 @@ export class PostComponent implements OnInit {
   constructor(private _postService: PostService,
               private _likeService: LikePostService,
               public dialog: MatDialog,
-              private _jwtTokenService: JwtTokenService) {
+              private _jwtTokenService: JwtTokenService,
+              private sseService: SseService,
+              private mercureService: MercureService) {
     this.currentUser =  Number(this._jwtTokenService.getIdUser())
   }
 
@@ -32,11 +36,17 @@ export class PostComponent implements OnInit {
         if (this.posts.length > 0) {}
       }
     );
-
+    this.sseService.getServerSentEvent(this.mercureService.getMercureUrlPostsTopic().toString()).subscribe(() => {
+      this._postService.getPosts().subscribe(posts => {
+          this.posts = posts;
+          if (this.posts.length > 0) {}
+        }
+      );
+    });
   }
 
   openDialog(idPostToDelete: number): void {
-    let dialogRef = this.dialog.open(DeletePostComponent, {
+    this.dialog.open(DeletePostComponent, {
       width: '400px',
       data: { idPost:  idPostToDelete}
     });

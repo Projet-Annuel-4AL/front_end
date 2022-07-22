@@ -18,12 +18,18 @@ export class CollaborationComponent implements OnInit {
 
   constructor(private http: HttpClient,) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.language = 'java';
     this.theme = 'vs-dark'
     this.editorOptions = {readOnly: false, theme: this.theme, language: this.language, automaticLayout: true};
     this.code = 'public class Main{\n\tpublic static void main(String [] args){\n\t\tSystem.out.println("Hello Java!");\n\t}\n}';
-
+    this.sseService.getServerSentEvent(this.mercureService.getMercureUrlCollabTopic(2).toString()).subscribe(data => {
+      this.codeService.getCodeById(21).subscribe(code => {
+          this.code = code.content;
+        console.log(code)
+        }
+      );
+    });
   }
 
   onChangeLanguageToJava(){
@@ -46,6 +52,7 @@ export class CollaborationComponent implements OnInit {
     if (this.language == 'cpp') this.langNumber = 2;
     if (this.language == 'java') this.langNumber = 0;
   }
+
   onRunCode(){
     this.getLangNumber()
     const body = {language: this.langNumber, code: this.code};
@@ -59,5 +66,29 @@ export class CollaborationComponent implements OnInit {
       .catch( err => {
         console.log(err)
       });
+  }
+
+  updateContentLoop(i: number){
+    return interval(i).subscribe(async () => {
+      const code = new UpdateCollabCodeDto(2, this.code)
+      await this.codeService.updateCodeById(21, code).subscribe()
+      //await this.mercureService.sendCollabUpdate(this.code, 2)
+      console.log('test')
+    });
+  }
+
+  updateCode(){
+    //this.mercureService.sendCollabUpdate(this.code, 2)
+
+  }
+
+  async startCollab() {
+    console.log('start')
+    this.runCollab = this.updateContentLoop(1000)
+  }
+
+  stopCollab(){
+    console.log('stop')
+    this.runCollab.unsubscribe()
   }
 }

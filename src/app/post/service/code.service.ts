@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Code} from "../post-body/domain/code.entity";
 import {ApiUrlConstant} from "../../apiUrlConstant";
+import {UpdateCollabCodeDto} from "../post-body/update-collab-code.dto";
 
 @Injectable()
 export class CodeService {
@@ -23,6 +24,44 @@ export class CodeService {
           codes.push(code);
         }
         observer.next(codes);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      })
+    });
+  }
+
+  getCodeById(codeId: number) {
+    return new Observable<Code>((observer) => {
+      this.http.get(this._url+codeId).subscribe((result: any) => {
+          const code = new Code(
+            result.id,
+            result.language,
+            result.content
+          );
+        observer.next(code);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      })
+    });
+  }
+
+  testMercureCollab() {
+    this.http.get(this._url+"collab").subscribe();
+  }
+
+  updateCodeById(codeId: number, updateCodeCollabDto: UpdateCollabCodeDto) {
+    return new Observable<Code>((observer) => {
+      this.http.patch(this._url+"collab/"+codeId, updateCodeCollabDto).subscribe((result: any) => {
+        const code = new Code(
+          result.id,
+          result.language,
+          result.content
+        );
+        observer.next(code);
         observer.complete();
       }, error => {
         observer.error(error);

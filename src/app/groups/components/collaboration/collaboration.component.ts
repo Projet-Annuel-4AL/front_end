@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiUrlConstant} from "../../../apiUrlConstant";
 import {HttpClient} from "@angular/common/http";
+import {SseService} from "../../../mercure/sse.service";
+import {MercureService} from "../../../mercure/mercure.service";
+import {interval, Subscription} from "rxjs";
+import {CodeService} from "../../../post/service/code.service";
+import {UpdateCollabCodeDto} from "../../../post/post-body/update-collab-code.dto";
 
 @Component({
   selector: 'app-collaboration',
@@ -15,8 +20,12 @@ export class CollaborationComponent implements OnInit {
   code!: string;
   editorOptions!: any;
   output!: string;
+  runCollab!: Subscription;
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient,
+              private sseService: SseService,
+              private codeService: CodeService,
+              private mercureService: MercureService) { }
 
   ngOnInit() {
     this.language = 'java';

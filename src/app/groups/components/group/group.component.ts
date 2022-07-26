@@ -6,6 +6,9 @@ import {JwtTokenService} from "../../../Authentication/services/jwt-token.servic
 import {UserService} from "../../../user/service/user.service";
 import {GroupRelationEntity} from "../../domain/group-relation.entity";
 import {CreateRelationDto} from "../../domain/create-relation.dto";
+import {Post} from "../../../post/domain/post.entity";
+import {MatDialog} from "@angular/material/dialog";
+import {UserGroupDialogComponent} from "../user-group-dialog/user-group-dialog.component";
 
 @Component({
   selector: 'app-group',
@@ -20,20 +23,23 @@ export class GroupComponent implements OnInit {
   isSubscribe: boolean = false;
   idRelation!: number;
   groupRelation!: GroupRelationEntity[];
+  posts!: Post[];
+  editorOptions!: any;
   nbSubscribe!: number;
   constructor(private _activatedRoute: ActivatedRoute,
               private _groupService: GroupService,
               private _jwtTokenService: JwtTokenService,
               private _userService: UserService,
-              private _router: Router) {
+              private _router: Router,
+              public dialog: MatDialog) {
     this.currentUser =  Number(this._jwtTokenService.getIdUser())
   }
 
   ngOnInit(): void {
-
+    this.editorOptions = {readOnly: true, theme: 'vs-dark', language: 'java', automaticLayout: true};
     const routeParams = this._activatedRoute.snapshot.paramMap;
     const idGroup = Number(routeParams.get('idGroup'));
-
+    this.getPostFromGroup(idGroup);
     this._groupService.getGroupById(idGroup).subscribe(group=>{
       this.group = group;
       this._userService.getUserByID(this.group.idGroupOwner).subscribe(user =>{
@@ -44,7 +50,6 @@ export class GroupComponent implements OnInit {
     this._groupService.getUserSubscribeByGroup(idGroup).subscribe(result=>{
       this.groupRelation = result;
     });
-    console.log(this.groupRelation);
 
   }
 
@@ -67,7 +72,6 @@ export class GroupComponent implements OnInit {
   }
   addSubscribe(){
     let createRelationDto = new CreateRelationDto(this.currentUser,this.group.idGroup);
-    console.log(createRelationDto);
     this._groupService.addRelation(createRelationDto);
   }
 
@@ -81,5 +85,25 @@ export class GroupComponent implements OnInit {
         this.idRelation = result.id;
       }
     })
+  }
+
+  getPostFromGroup(idGroup: number){
+    this._groupService.getRelationGroupPostByIdGroup(idGroup).subscribe(result=>{
+      this.posts = result;
+    });
+  }
+
+  openDialog(idGroup: number): void {
+
+    this._groupService.getUserSubscribeByGroup(idGroup).subscribe(results=>{
+      const listUser = [];
+      for (const result of results) {
+        listUser.push(result.user.firstName);
+      }
+      let dialogRef = this.dialog.open(UserGroupDialogComponent, {
+        data: { listUser: listUser}
+      });
+    });;
+
   }
 }

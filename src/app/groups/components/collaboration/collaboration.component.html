@@ -1,0 +1,12 @@
+<button mat-raised-button color="primary" (click)="onChangeLanguageToJava()">JAVA ☕️</button>
+<button mat-raised-button color="primary" (click)="onChangeLanguageToPython()">PYTHON 🐍</button>
+<button mat-raised-button color="primary" (click)="onChangeLanguageToCpp()">C++ 🚮️</button>
+
+<div style="width: 600px; height: 200px">
+  <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+</div>
+<button mat-stroked-button (click)="onRunCode()">RUN</button>
+<button mat-stroked-button (click)="startCollab()">Start</button>
+<button mat-stroked-button (click)="updateCode()">Update</button>
+<button mat-stroked-button (click)="stopCollab()">Stop</button>
+<p style="white-space: pre-wrap">output: {{ output }}</p>

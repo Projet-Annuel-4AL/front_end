@@ -8,6 +8,8 @@ import {GroupRelationEntity} from "../domain/group-relation.entity";
 import {CreateRelationDto} from "../domain/create-relation.dto";
 import {ApiUrlConstant} from "../../apiUrlConstant";
 import {JwtTokenService} from "../../Authentication/services/jwt-token.service";
+import {CreateRelationGroupPost} from "../domain/create-relation-group-post";
+import {Post} from "../../post/domain/post.entity";
 
 @Injectable()
 export class GroupService {
@@ -114,6 +116,7 @@ export class GroupService {
             result.id,
             result.idUser,
             result.idGroup);
+          relation.user = result.user;
           relations.push(relation);
         }
         observer.next(relations);
@@ -156,5 +159,63 @@ export class GroupService {
           console.error('There was an error!');
         }
       });
+  }
+
+  getGroupRelationByUserId(userId: number){
+    return new Observable<Group[]>((observer) => {
+      this.http.get(ApiUrlConstant.HOST+"relation-group-user/groups/" + userId).subscribe((results: any) => {
+        const groups = [];
+
+        for (const result of results) {
+          const group = new Group(
+            result.group.id,
+            result.group.name,
+            result.group.theme,
+            result.group.description,
+            result.group.idGroupOwner);
+
+          groups.push(group);
+        }
+        observer.next(groups);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      })
+    });
+  }
+
+  addRelationBetweenGroupAndPost(idGroup: number, idPost: number) {
+    const relation = new CreateRelationGroupPost(idPost,idGroup);
+    this.http.post(ApiUrlConstant.HOST+"relation-group-post/",relation).subscribe((results: any) => {
+    });
+  }
+
+  getRelationGroupPostByIdGroup(idGroup: number){
+    return new Observable<Post[]>((observer) => {
+      this.http.get(ApiUrlConstant.HOST+"relation-group-post/posts/" + idGroup).subscribe((results: any) => {
+        const posts = [];
+        for (const result of results) {
+          const post = new Post(
+            result.post.id,
+            result.post.title,
+            result.post.createdDate.split('T')[0],
+            result.post.idVideo,
+            result.post.idPicture,
+            result.post.text,
+            result.post.code,
+            result.post.user,
+            result.post.remarks,
+            result.post.likes);
+          //post.numberOfRemarks = result.remarks.length;
+          posts.push(post);
+        }
+        observer.next(posts);
+        observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      })
+    });
   }
 }

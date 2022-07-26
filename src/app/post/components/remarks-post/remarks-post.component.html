@@ -1,6 +1,6 @@
 <div>
 <div class="container d-flex align-items-center justify-content-center" style="margin-top: 20px;">
-  <mat-card style="height: 400px">
+  <mat-card style="height: 400px; width: 500px">
     <mat-card-header>
       <mat-card-subtitle>{{post.user.firstName}}</mat-card-subtitle>
       <mat-card-subtitle>Posté le {{post.createdDate}}</mat-card-subtitle>
@@ -13,20 +13,20 @@
       <div style="width: 600px; height: 200px">
         <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="post.code.content"></ngx-monaco-editor>
 
-        <button (click)="onRunCode()">RUN</button>
+        <button mat-stroked-button (click)="onRunCode()">RUN</button>
 
         <p style="white-space: pre-wrap">output: {{ output }}</p>
       </div>
     </div>
     <mat-card-content *ngIf="post.text !== null">
-      <p> {{post.text.content}}</p>
+      <p [innerHTML] = "post.text.content"></p>
     </mat-card-content>
   </mat-card>
 </div>
 <mat-card class="" style="margin-top: 10px;">
   <ul *ngFor=" let remark of remarks">
     <div class="card border-light w-50">
-      <mat-card-subtitle>{{remark.name}}</mat-card-subtitle>
+      <mat-card-subtitle>{{remark.name}} le {{remark.createdDate.split('T')[0]}}</mat-card-subtitle>
       {{remark.content}}
     </div>
     <div *ngIf="remark.idUser == currentUser">

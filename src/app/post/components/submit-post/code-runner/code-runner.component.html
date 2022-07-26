@@ -12,7 +12,16 @@
 <button mat-stroked-button (click)="onRunCode()">RUN</button>
 
 <p style="white-space: pre-wrap">output: {{ output }}</p>
-
+<div class="form-group center" >
+  <mat-form-field appearance="fill">
+    <mat-label>Relier a un groupe</mat-label>
+    <mat-select (selectionChange)="change($event.value)" formControlName="group" id="groupValue">
+      <mat-option *ngFor="let group of groupList" [value]="group.idGroup">
+        {{group.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 <mat-card-actions>
   <div class="center">
     <button type="submit" mat-raised-button color="primary" [disabled]="isNotValidPost()" (click)="submitPostForm()">

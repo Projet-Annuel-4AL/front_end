@@ -32,6 +32,9 @@
                 </button>
               </ng-template>
             </li>
+            <li>
+              <a [routerLink]="['../../collab/',group.idGroup]">Route collab</a>
+            </li>
           </ul>
         </mat-card>
       </div>
@@ -41,36 +44,48 @@
 
 <div class="container" style="margin-top: 20px;">
   <div class="row">
-    <div class="col-8">
-      <mat-card style="margin-bottom:10px">
-        <mat-card-subtitle> Seenix </mat-card-subtitle>
-        <mat-card-subtitle> Posté il y a 30 min </mat-card-subtitle>
-        <mat-card-title> Comment je gère mes projets en AL...</mat-card-title>
-        <img src="https://img.lemde.fr/2016/08/04/0/0/560/267/664/0/75/0/a9b1471_17806-xsb5q2.jpg" mat-card-image>
-        <mat-card-footer style="padding-bottom: 10px;">
-          <ul class="d-flex align-items-center justify-content-around">
-            <li>
-              <a mat-button >
-                <mat-icon> thumb_up </mat-icon>
-                J'aime
-              </a>
-            </li>
-            <li>
-              <a mat-button >
-                <mat-icon>mode_comment </mat-icon>
-                Commentaires
-              </a>
-            </li>
-            <li>
-              <a mat-button >
-                <mat-icon> share </mat-icon>
-                Partager
-              </a>
-            </li>
-          </ul>
-        </mat-card-footer>
-      </mat-card>
-    </div>
+
+      <div class="col-8" *ngIf="posts && posts.length > 0">
+        <div class="row" *ngFor=" let post of posts">
+          <div class="col-8">
+            <mat-card style="margin-bottom:10px">
+              <mat-card-subtitle> {{ post.user.firstName }} </mat-card-subtitle>
+              <mat-card-subtitle> Posté le {{post.createdDate}} </mat-card-subtitle>
+              <mat-card-title> {{post.title}}</mat-card-title>
+              <div style="margin-left: 15px;">
+                <div *ngIf="post.code !== null">
+                  <div style="width: 600px; height: 200px">
+                    <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="post.code.content"></ngx-monaco-editor>
+                  </div>
+                </div>
+                <mat-card-content *ngIf="post.text !== null">
+                  <p [innerHTML] = "post.text.content"></p>
+                </mat-card-content>
+              </div>
+              <mat-card-footer style="padding-bottom: 10px;">
+                <ul class="d-flex align-items-center justify-content-around">
+                  <li>
+                    <app-like [post]="post"></app-like>
+                  </li>
+                  <li>
+                    <ng-template [ngIf]="post.remarks.length > 0">
+                      <span> {{post.remarks.length}} </span>
+                    </ng-template>
+                    <a mat-button [routerLink]="['/remark-post/', post.idPost]">
+                      <mat-icon>mode_comment </mat-icon>
+                      Commentaires
+                    </a>
+                  </li>
+                  <li>
+                    <app-share-post></app-share-post>
+                  </li>
+                </ul>
+              </mat-card-footer>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
     <div class="col-4">
       <mat-card class="matCardWithNoPadding">
         <div  style="background-color: #673ab4; height: 30px; padding-bottom: 40px; padding-top: 10px">
@@ -80,7 +95,7 @@
           {{group.description}}
         </mat-card-content>
         <div class="d-flex justify-content-md-center">
-            <mat-card-content> {{groupRelation.length}} Membres </mat-card-content>
+            <button mat-flat-button (click)="openDialog(group.idGroup)">{{groupRelation.length}} Membres </button>
         </div>
         <hr>
         <div class="d-flex justify-content-start">
@@ -88,7 +103,6 @@
             <h6 style="margin-top: 4px">Créer le :  12/07/2020</h6>
         </div>
         <div style="padding: 10px">
-
         <mat-chip-list>
           <a> <mat-chip color="accent" selected> {{group.theme}} </mat-chip> </a>
         </mat-chip-list>
@@ -96,36 +110,5 @@
       </mat-card>
     </div>
   </div>
-  <div class="row">
-    <div class="col-8">
-      <mat-card style="margin-bottom:10px">
-        <mat-card-subtitle> Seenix </mat-card-subtitle>
-        <mat-card-subtitle> Posté il y a 30 min </mat-card-subtitle>
-        <mat-card-title> Comment je gère mes projets en AL...</mat-card-title>
-        <img src="https://img.lemde.fr/2016/08/04/0/0/560/267/664/0/75/0/a9b1471_17806-xsb5q2.jpg" mat-card-image>
-        <mat-card-footer style="padding-bottom: 10px;">
-          <ul class="d-flex align-items-center justify-content-around">
-            <li>
-              <a mat-button >
-                <mat-icon> thumb_up </mat-icon>
-                J'aime
-              </a>
-            </li>
-            <li>
-              <a mat-button >
-                <mat-icon>mode_comment </mat-icon>
-                Commentaires
-              </a>
-            </li>
-            <li>
-              <a mat-button >
-                <mat-icon> share </mat-icon>
-                Partager
-              </a>
-            </li>
-          </ul>
-        </mat-card-footer>
-      </mat-card>
-    </div>
-  </div>
+
 </div>

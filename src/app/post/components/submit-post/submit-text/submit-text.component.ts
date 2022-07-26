@@ -4,6 +4,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CreateText} from "../../../post-body/create-text.dto";
 import {PostService} from "../../../service/post.service";
 import {Router} from "@angular/router";
+import {JwtTokenService} from "../../../../Authentication/services/jwt-token.service";
+import {GroupService} from "../../../../groups/service/group.service";
+import {Group} from "../../../../groups/domain/group.entity";
 
 @Component({
   selector: 'app-submit-text',
@@ -12,9 +15,14 @@ import {Router} from "@angular/router";
 })
 export class SubmitTextComponent{
 
-
+  currentUser! : number
+  groupList!: Group[];
+  selectedValue!: string;
   constructor(private postService: PostService,
-              private _router: Router) {
+              private _router: Router,
+              private _jwtTokenService: JwtTokenService,
+              private _groupService: GroupService) {
+    this.currentUser =  Number(this._jwtTokenService.getIdUser())
   }
 
   editorConfig: AngularEditorConfig = {
@@ -70,12 +78,23 @@ export class SubmitTextComponent{
     ]),
     description: new FormControl(null, [
       Validators.required
+    ]),
+    group: new FormControl(null, [
+
     ])
   })
 
+  ngOnInit(): void {
+    this._groupService.getGroupRelationByUserId(this.currentUser).subscribe(result=>{
+      this.groupList = result;
+    });
+
+  }
+
   submitPostForm() {
+    const idGroup = this.postForm.value.group;
     const createdText: CreateText = new CreateText(this.postForm.value.description);
-    this.postService.addText(createdText, this.postForm.value.title).subscribe();
+    this.postService.addText(createdText, this.postForm.value.title, idGroup).subscribe();
     this._router.navigateByUrl('');
   }
 

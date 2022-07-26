@@ -19,7 +19,7 @@
       </div>
     </div>
     <mat-card-content *ngIf="post.text !== null">
-      <p> {{post.text.content}}</p>
+      <p [innerHTML] = "post.text.content"></p>
     </mat-card-content>
   </mat-card>
 </div>

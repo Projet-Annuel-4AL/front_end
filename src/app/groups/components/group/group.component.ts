@@ -6,6 +6,7 @@ import {JwtTokenService} from "../../../Authentication/services/jwt-token.servic
 import {UserService} from "../../../user/service/user.service";
 import {GroupRelationEntity} from "../../domain/group-relation.entity";
 import {CreateRelationDto} from "../../domain/create-relation.dto";
+import {Post} from "../../../post/domain/post.entity";
 
 @Component({
   selector: 'app-group',
@@ -20,6 +21,8 @@ export class GroupComponent implements OnInit {
   isSubscribe: boolean = false;
   idRelation!: number;
   groupRelation!: GroupRelationEntity[];
+  posts!: Post[];
+  editorOptions!: any;
   nbSubscribe!: number;
   constructor(private _activatedRoute: ActivatedRoute,
               private _groupService: GroupService,
@@ -30,10 +33,10 @@ export class GroupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.editorOptions = {readOnly: true, theme: 'vs-dark', language: 'java', automaticLayout: true};
     const routeParams = this._activatedRoute.snapshot.paramMap;
     const idGroup = Number(routeParams.get('idGroup'));
-
+    this.getPostFromGroup(idGroup);
     this._groupService.getGroupById(idGroup).subscribe(group=>{
       this.group = group;
       this._userService.getUserByID(this.group.idGroupOwner).subscribe(user =>{
@@ -81,5 +84,13 @@ export class GroupComponent implements OnInit {
         this.idRelation = result.id;
       }
     })
+  }
+
+  getPostFromGroup(idGroup: number){
+    this._groupService.getRelationGroupPostByIdGroup(idGroup).subscribe(result=>{
+      console.log('test get post',result);
+      this.posts = result;
+    });
+
   }
 }

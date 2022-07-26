@@ -5,6 +5,8 @@ import { GroupsComponent } from './groups.component';
 import { GroupComponent } from './components/group/group.component';
 import {SharedModule} from "../shared/shared.module";
 import { CreateGroupComponent } from './components/create-group/create-group.component';
+import {MonacoEditorModule} from "ngx-monaco-editor";
+import {PostModule} from "../post/post.module";
 
 
 
@@ -17,7 +19,9 @@ import { CreateGroupComponent } from './components/create-group/create-group.com
   imports: [
     CommonModule,
     GroupsRoutingModule,
-    SharedModule
+    SharedModule,
+    MonacoEditorModule,
+    PostModule
   ]
 })
 export class GroupsModule { }

@@ -22,7 +22,6 @@ export class AdminPostsComponent implements OnInit {
   ngOnInit(): void {
     this._postService.getPosts().subscribe(posts => {
         this.posts = posts;
-        console.log(this.posts);
         this.editorOptions = {readOnly: true, theme: 'vs-dark', language: 'java', automaticLayout: true};
         if (this.posts.length > 0) {}
       }

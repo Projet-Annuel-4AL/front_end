@@ -7,6 +7,8 @@ import {SharedModule} from "../shared/shared.module";
 import { CreateGroupComponent } from './components/create-group/create-group.component';
 import {MonacoEditorModule} from "ngx-monaco-editor";
 import {PostModule} from "../post/post.module";
+import { UserGroupDialogComponent } from './components/user-group-dialog/user-group-dialog.component';
+import { CollaborationComponent } from './components/collaboration/collaboration.component';
 
 
 
@@ -14,7 +16,9 @@ import {PostModule} from "../post/post.module";
   declarations: [
     GroupsComponent,
     GroupComponent,
-    CreateGroupComponent
+    CreateGroupComponent,
+    UserGroupDialogComponent,
+    CollaborationComponent
   ],
   imports: [
     CommonModule,

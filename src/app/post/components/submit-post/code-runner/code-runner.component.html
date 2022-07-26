@@ -15,7 +15,7 @@
 <div class="form-group center" >
   <mat-form-field appearance="fill">
     <mat-label>Relier a un groupe</mat-label>
-    <mat-select name="group" formControlName="group" id="groupValue">
+    <mat-select (selectionChange)="change($event.value)" formControlName="group" id="groupValue">
       <mat-option *ngFor="let group of groupList" [value]="group.idGroup">
         {{group.name}}
       </mat-option>
@@ -24,7 +24,7 @@
 </div>
 <mat-card-actions>
   <div class="center">
-    <button type="submit" mat-raised-button color="primary"  (click)="submitPostForm()">
+    <button type="submit" mat-raised-button color="primary" [disabled]="isNotValidPost()" (click)="submitPostForm()">
       Valider
     </button>
   </div>

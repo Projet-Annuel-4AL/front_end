@@ -13,13 +13,13 @@
       <div style="width: 600px; height: 200px">
         <ngx-monaco-editor style="width: 100%; height: 100%" [options]="editorOptions" [(ngModel)]="post.code.content"></ngx-monaco-editor>
 
-        <button (click)="onRunCode()">RUN</button>
+        <button mat-stroked-button (click)="onRunCode()">RUN</button>
 
         <p style="white-space: pre-wrap">output: {{ output }}</p>
       </div>
     </div>
     <mat-card-content *ngIf="post.text !== null">
-      <p> {{post.text.content}}</p>
+      <p [innerHTML] = "post.text.content"></p>
     </mat-card-content>
   </mat-card>
 </div>

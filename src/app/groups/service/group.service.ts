@@ -116,6 +116,7 @@ export class GroupService {
             result.id,
             result.idUser,
             result.idGroup);
+          relation.user = result.user;
           relations.push(relation);
         }
         observer.next(relations);
@@ -175,7 +176,6 @@ export class GroupService {
 
           groups.push(group);
         }
-        console.log("group dans le service", groups);
         observer.next(groups);
         observer.complete();
       }, error => {
@@ -186,9 +186,7 @@ export class GroupService {
   }
 
   addRelationBetweenGroupAndPost(idGroup: number, idPost: number) {
-    console.log('on est dans la creation', idGroup, idPost);
     const relation = new CreateRelationGroupPost(idPost,idGroup);
-    console.log('on est dans la creation', relation);
     this.http.post(ApiUrlConstant.HOST+"relation-group-post/",relation).subscribe((results: any) => {
     });
   }

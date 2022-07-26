@@ -1,0 +1,21 @@
+name: Start Server
+
+on:
+  workflow_run:
+    workflows: [Deploy front-end aplication on EC2]
+    types:
+      - completed
+
+jobs:
+  startServer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: start server nest
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS_FRONT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY_FRONT }}
+          port: ${{ secrets.PORT }}
+          script: ./restart.sh

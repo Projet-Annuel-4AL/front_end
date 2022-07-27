@@ -6,6 +6,8 @@ import {MercureService} from "../../../mercure/mercure.service";
 import {interval, Subscription} from "rxjs";
 import {CodeService} from "../../../post/service/code.service";
 import {UpdateCollabCodeDto} from "../../../post/post-body/update-collab-code.dto";
+import {ActivatedRoute} from "@angular/router";
+import {GroupService} from "../../service/group.service";
 
 @Component({
   selector: 'app-collaboration',
@@ -21,24 +23,32 @@ export class CollaborationComponent implements OnInit {
   editorOptions!: any;
   output!: string;
   runCollab!: Subscription;
+  idGroupToGet!: number;
 
   constructor(private http: HttpClient,
               private sseService: SseService,
               private codeService: CodeService,
-              private mercureService: MercureService) { }
+              private mercureService: MercureService,
+              private route: ActivatedRoute,
+              private _groupService: GroupService) {
+    this.idGroupToGet = Number(this.route.snapshot.paramMap.get('idGroup'))
+  }
 
   ngOnInit() {
-    this.language = 'java';
-    this.theme = 'vs-dark'
-    this.editorOptions = {readOnly: false, theme: this.theme, language: this.language, automaticLayout: true};
-    this.code = 'public class Main{\n\tpublic static void main(String [] args){\n\t\tSystem.out.println("Hello Java!");\n\t}\n}';
-    this.sseService.getServerSentEvent(this.mercureService.getMercureUrlCollabTopic(2).toString()).subscribe(data => {
-      this.codeService.getCodeById(21).subscribe(code => {
-          this.code = code.content;
-        console.log(code)
-        }
-      );
-    });
+    this._groupService.getCollabByGroupId(this.idGroupToGet).subscribe(result=>{
+      this.language = this.getLangString(result.code.language);
+      this.theme = 'vs-dark'
+      this.editorOptions = {readOnly: false, theme: this.theme, language: this.language, automaticLayout: true};
+      this.code = result.code.content;
+      this.sseService.getServerSentEvent(this.mercureService.getMercureUrlCollabTopic(this.idGroupToGet).toString()).subscribe(data => {
+        this.codeService.getCodeById(result.code.id).subscribe(code => {
+            this.code = code.content;
+            console.log(code)
+          }
+        );
+      });
+    })
+
   }
 
   onChangeLanguageToJava(){
@@ -60,6 +70,12 @@ export class CollaborationComponent implements OnInit {
     if (this.language == 'python') this.langNumber = 1;
     if (this.language == 'cpp') this.langNumber = 2;
     if (this.language == 'java') this.langNumber = 0;
+  }
+
+  getLangString(language: number){
+    if (language == 0) return "java" ;
+    if (language == 2) return "cpp" ;
+    return "python" ;
   }
 
   onRunCode(){

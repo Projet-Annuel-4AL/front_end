@@ -186,6 +186,7 @@ export class GroupService {
   }
 
   addRelationBetweenGroupAndPost(idGroup: number, idPost: number) {
+    console.log(idPost)
     const relation = new CreateRelationGroupPost(idPost,idGroup);
     this.http.post(ApiUrlConstant.HOST+"relation-group-post/",relation).subscribe((results: any) => {
     });

@@ -1,8 +1,8 @@
 export class CreateCode {
-  readonly language: number;
+  readonly language: string;
   readonly content: string;
 
-  constructor(language: number, content: string) {
+  constructor(language: string, content: string) {
     this.language = language;
     this.content = content;
   }

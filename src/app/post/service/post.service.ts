@@ -107,8 +107,8 @@ export class PostService {
   addPost(postToAdd: CreatePost, idGroup: number) {
     return new Observable<Post>((observer) => {
       this.http.post(this._url, postToAdd).subscribe((result: any) => {
-        if(idGroup != null){
-          this._groupService.addRelationBetweenGroupAndPost(idGroup,result.id);
+        if (idGroup != null) {
+          this._groupService.addRelationBetweenGroupAndPost(idGroup, result.id);
         }
         this._router.navigateByUrl("")
           .then(() => {

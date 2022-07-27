@@ -94,7 +94,7 @@ export class CodeRunnerComponent implements OnInit {
   submitPostForm() {
     const idGroup = this.groupId;
     this.getLangNumber()
-    const createCode: CreateCode = new CreateCode(this.langNumber, this.code);
+    const createCode: CreateCode = new CreateCode(String(this.langNumber), this.code);
     this.postService.addCode(createCode, this.title, idGroup).subscribe();
   }
 }

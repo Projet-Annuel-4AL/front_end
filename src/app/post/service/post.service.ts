@@ -106,14 +106,16 @@ export class PostService {
 
   addPost(postToAdd: CreatePost, idGroup: number) {
     return new Observable<Post>((observer) => {
+      console.log("postToAdd:" + postToAdd)
       this.http.post(this._url, postToAdd).subscribe((result: any) => {
+        console.log("idGroup:" + idGroup)
         if(idGroup != null){
           this._groupService.addRelationBetweenGroupAndPost(idGroup,result.id);
         }
-        this._router.navigateByUrl("")
+       /* this._router.navigateByUrl("")
           .then(() => {
             window.location.reload();
-          });
+          });*/
         observer.next(result);
         observer.complete();
       }, error => {

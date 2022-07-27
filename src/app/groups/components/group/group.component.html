@@ -33,7 +33,12 @@
               </ng-template>
             </li>
             <li>
-              <a [routerLink]="['../../collab/',group.idGroup]">Route collab</a>
+              <ng-template [ngIf]="isSubscribe" >
+                <button type="submit" mat-button mat-raised-button color="accent" (click)="createCollab(group.idGroup)">
+                  Collaboration
+                </button>
+              </ng-template>
+<!--              <a [routerLink]="['../../collab/',group.idGroup]">Route collab</a>-->
             </li>
           </ul>
         </mat-card>

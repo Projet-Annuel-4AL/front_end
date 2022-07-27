@@ -20,7 +20,8 @@ export class UserService {
           result.firstName,
           result.lastName,
           result.mail,
-          result.avatar);
+          result.avatar,
+          result.admin);
         observer.next(user);
         observer.complete();
       }, error => {
@@ -41,7 +42,8 @@ export class UserService {
             result.firstName,
             result.lastName,
             result.mail,
-            result.avatar);
+            result.avatar,
+            result.admin);
           users.push(user);
         }
         observer.next(users);

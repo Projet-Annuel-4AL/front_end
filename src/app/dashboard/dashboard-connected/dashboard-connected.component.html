@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <a routerLink="/">Palit</a>
-  <ng-template [ngIf]="idUser == 2">
+  <ng-template [ngIf]="user.admin == true">
     <span> <a mat-button routerLink="admin" title="Espace Admin">	<mat-icon>settings</mat-icon></a> </span>
   </ng-template>
 
@@ -8,7 +8,7 @@
 
   <a mat-button routerLink="groups">Communauté </a>
 
-  <a mat-button [routerLink]="['user/profile', idUser]"> Profil </a>
+  <a mat-button [routerLink]="['user/profile', user.id]"> Profil </a>
 
   <a mat-button (click)="deconnection()">Deconnexion </a>
 

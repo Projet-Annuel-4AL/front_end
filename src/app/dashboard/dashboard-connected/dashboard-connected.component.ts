@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {JwtTokenService} from "../../Authentication/services/jwt-token.service";
 import {LocalStorageService} from "../../Authentication/services/local-storage.service";
 import {Router} from "@angular/router";
+import {User} from "../../user/domain/user.entity";
+import {UserService} from "../../user/service/user.service";
 
 @Component({
   selector: 'app-dashboard-connected',
@@ -9,13 +11,21 @@ import {Router} from "@angular/router";
   styleUrls: ['./dashboard-connected.component.scss']
 })
 export class DashboardConnectedComponent implements OnInit {
-  idUser! : number
+  user!: User
 
-  constructor(private _jwtTokenService: JwtTokenService, private _localStorageService: LocalStorageService, private _router: Router) {
-    this.idUser = Number(_jwtTokenService.getIdUser())
+  constructor(
+    private _jwtTokenService: JwtTokenService,
+    private _localStorageService: LocalStorageService,
+    private _router: Router,
+    private _userService: UserService) {
+
   }
 
   ngOnInit(): void {
+    const userId = Number(this._jwtTokenService.getIdUser())
+    this._userService.getUserByID(userId).subscribe( user => {
+      this.user = user
+    })
   }
 
   deconnection(): void {

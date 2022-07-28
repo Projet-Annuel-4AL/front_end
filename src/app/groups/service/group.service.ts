@@ -10,6 +10,8 @@ import {ApiUrlConstant} from "../../apiUrlConstant";
 import {JwtTokenService} from "../../Authentication/services/jwt-token.service";
 import {CreateRelationGroupPost} from "../domain/create-relation-group-post";
 import {Post} from "../../post/domain/post.entity";
+import {CreateCollabDto} from "../domain/create-collab.dto";
+import {CollabEntity} from "../domain/collab.entity";
 
 @Injectable()
 export class GroupService {
@@ -213,6 +215,43 @@ export class GroupService {
         }
         observer.next(posts);
         observer.complete();
+      }, error => {
+        observer.error(error);
+        observer.complete();
+      })
+    });
+  }
+
+  createCollab(idGroup: number) {
+    return new Observable<CollabEntity>((observer) => {
+      const collab = new CreateCollabDto(idGroup);
+      this.http.post(ApiUrlConstant.HOST+"collabs/",collab).subscribe((result: any) => {
+        const collab = new CollabEntity(
+          result.id,
+          result.idGroup,
+          result.code);
+        observer.next(collab);
+        observer.complete();
+      });
+    });
+  }
+
+  getCollabByGroupId(idGroup: number) {
+    return new Observable<CollabEntity>((observer) => {
+      this.http.get(ApiUrlConstant.HOST+"collabs/" + idGroup).subscribe((result: any) => {
+        if(result == null){
+          observer.next(result);
+          observer.complete();
+
+        }else{
+          const collab = new CollabEntity(
+            result.id,
+            result.idGroup,
+            result.code);
+          observer.next(collab);
+          observer.complete();
+        }
+
       }, error => {
         observer.error(error);
         observer.complete();

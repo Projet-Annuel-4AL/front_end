@@ -106,4 +106,16 @@ export class GroupComponent implements OnInit {
     });;
 
   }
+
+  createCollab(idGroup: number){
+    this._groupService.getCollabByGroupId(idGroup).subscribe(result =>{
+      if(result == null){
+        this._groupService.createCollab(idGroup).subscribe(result=>{
+          this._router.navigateByUrl('groups/collab/'+result.idGroup);
+        });
+      }
+      this._router.navigateByUrl('groups/collab/'+result.idGroup);
+    })
+
+  }
 }

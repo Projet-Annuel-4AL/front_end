@@ -20,7 +20,8 @@ export class CodeRunnerComponent implements OnInit {
   code!: string;
   editorOptions!: any;
   output!: string;
-  codeRunner: boolean = false;
+  codeRun: boolean = false;
+  isValid: boolean = false;
   currentUser! : number;
   groupList!: Group[];
   groupId!: any;
@@ -65,7 +66,9 @@ export class CodeRunnerComponent implements OnInit {
     if (this.language == 'java') this.langNumber = 0;
   }
   onRunCode(){
-    this.codeRunner = false;
+    this.isValid = false;
+    this.codeRun = true;
+    this.output = '';
     this.getLangNumber()
     const body = {language: this.langNumber, code: this.code};
 
@@ -73,7 +76,8 @@ export class CodeRunnerComponent implements OnInit {
       .post( ApiUrlConstant.HOST+"compiler",body, {responseType: 'text'}).toPromise()
       .then(response => {
         this.output = response;
-        this.codeRunner = true;
+        this.codeRun = false;
+        this.isValid = true;
       })
       .catch( err => {
         console.log(err)
@@ -81,7 +85,7 @@ export class CodeRunnerComponent implements OnInit {
   }
 
   isNotValidPost(): boolean{
-    if(this.codeRunner){
+    if(this.isValid){
       if (this.title.length > 0){
         return false
       }

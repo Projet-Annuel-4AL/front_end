@@ -40,8 +40,6 @@ export class PostComponent implements OnInit {
     this.sseService.getServerSentEvent(this.mercureService.getMercureUrlPostsTopic().toString()).subscribe(() => {
       this._postService.getPosts().subscribe(posts => {
           this.posts = posts;
-          if (this.posts.length > 0) {
-          }
         }
       );
     });

@@ -34,7 +34,8 @@ export class GroupService {
             result.name,
             result.theme,
             result.description,
-            result.idGroupOwner);
+            result.idGroupOwner,
+            result.picture);
           groups.push(group);
         }
         observer.next(groups);
@@ -56,7 +57,8 @@ export class GroupService {
             result.name,
             result.theme,
             result.description,
-            result.idGroupOwner);
+            result.idGroupOwner,
+            result.picture);
           groups.push(group);
         }
         observer.next(groups);
@@ -76,7 +78,8 @@ export class GroupService {
           result.name,
           result.theme,
           result.description,
-          result.idGroupOwner);
+          result.idGroupOwner,
+          result.picture);
         observer.next(group);
         observer.complete();
       }, error => {
@@ -174,7 +177,8 @@ export class GroupService {
             result.group.name,
             result.group.theme,
             result.group.description,
-            result.group.idGroupOwner);
+            result.group.idGroupOwner,
+            result.picture);
 
           groups.push(group);
         }
